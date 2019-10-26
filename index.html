@@ -17,18 +17,33 @@
 <body>
 
   <header>
-    <nav>
-      <h1>Travel Rich</h1>
+    <nav class="center">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Travel Rich</a>
+          </div>
     </nav>
   </header>
 
   <div id = "start-container">
     <div class = "row">
       <div class = "col s12">
+          <div class="card center">
+              <div class="card-image" style="margin-left:23%">
+                <img src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" style="width:70%">
+                <span class="card-title">Greetings, Fellow Earthling!</span>
+              </div>
+              <div class="card-content">
+                <p>This is an app to assist travelers to get basic information on their destination.</p>
+              </div>
+              <div class="card-action">
+                <a class="waves-effect waves-light btn start-btn">Get Started</a>
+              </div>
+            </div>
       </div>
     </div>
   </div> 
-  <div id = "dropdown-container">
+
+  <div id = "dropdown-container" style="display:none">
     <div class = "row" id = "instructions"></div>
     <div class = "row">
       <div class = "col s4" id ="continent"></div>
@@ -41,6 +56,7 @@
       </div>
     </div>
   </div>
+
   <div id = "cityinfo-container">
     <div class = "row">
       <div class = "col s6"></div>
@@ -50,8 +66,14 @@
       <div class = "col s9"></div>
       <div class = "col s3"></div>
     </div>
+    <div class ="row">
+      <div class = "col s12" id ="nav-btn"></div>
+    </div>
   </div>
-  <div id = "search-history"></div>
+
+  <!-- <div id = "search-history">
+
+  </div> -->
 
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>

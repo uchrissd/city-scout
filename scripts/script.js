@@ -46,3 +46,12 @@ $("li").on("click", function (event) {
   console.log(event.target.attr('data-geoname'))
   console.log(event)
 })
+
+//JQuery get variables
+var startContainer = $("#start-container");
+var dropDownContainer = $("#dropdown-container");
+
+$(".start-btn").on("click", function () {
+  startContainer.attr("style","display:none");
+  dropDownContainer.attr("style","display:block");
+})
