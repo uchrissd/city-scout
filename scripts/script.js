@@ -30,12 +30,19 @@ console.log(Object.keys(continentsObj));
 function RenderContinenets() {
   var contArray = Object.values(continentsObj)
   console.log(contArray)
-  for (var i = 0; i < contArray.length; i++) {
-    console.log(i);
+  var contKeys = Object.keys(continentsObj)
+  console.log(contKeys)
+  for (var continentCode in continentsObj) {
+    console.log("code", continentCode)
+    console.log("continent", continentsObj[continentCode])
     var contList = $('<ul>')
     $("#continent").append(contList);
-    var cont = $("<li>" + contArray[i] + "</li>");
+    var cont = $("<li>" + continentsObj[continentCode] + "</li>").attr('data-contGeoName', continentCode)
     $("#continent").append(cont);
   }
 }
 RenderContinenets();
+$("li").on("click", function (event) {
+  console.log(event.target.attr('data-geoname'))
+  console.log(event)
+})
