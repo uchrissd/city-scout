@@ -7,7 +7,7 @@ console.log(queryURL);
 $.ajax({
   url: queryURL,
   method: "GET"
-}).then(function(response) {
+}).then(function (response) {
   console.log(response);
 });
 
@@ -18,25 +18,23 @@ var continentQueryURL = "https://api.teleport.org/api/continents/";
 $.ajax({
   url: continentQueryURL,
   method: "GET"
-}).then(function(response) {
+}).then(function (response) {
   console.log(response);
 });
 
 //
 
+var continentsObj = { AF: 'Africa', AN: 'Antarctica', AS: 'Asia', EU: 'Europe', NA: 'North America', OC: 'Australia', SA: 'South America' }
+console.log(Object.keys(continentsObj));
+
 function RenderContinenets() {
-  var contArray = [
-    "Africa",
-    "Asia",
-    "Antartica",
-    "Australia",
-    "Europe",
-    "North America",
-    "South America"
-  ];
+  var contArray = Object.values(continentsObj)
+  console.log(contArray)
   for (var i = 0; i < contArray.length; i++) {
     console.log(i);
-    var cont = $("<p>" + contArray[i] + "</p>");
+    var contList = $('<ul>')
+    $("#continent").append(contList);
+    var cont = $("<li>" + contArray[i] + "</li>");
     $("#continent").append(cont);
   }
 }
