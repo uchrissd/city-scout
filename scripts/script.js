@@ -37,7 +37,7 @@ function RenderContinenets() {
   for (var i = 0; i < contArray.length; i++) {
     console.log(i);
     var cont = $("<p>" + contArray[i] + "</p>");
-    $("#cont-div").append(cont);
+    $("#continent").append(cont);
   }
 }
 RenderContinenets();
