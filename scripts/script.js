@@ -39,7 +39,7 @@ function RenderContinents() {
     console.log("code", continentCode)
     console.log("continent", continentsObj[continentCode])
     var cont = $("<a href='#'>" + continentsObj[continentCode] + "</a>")
-    cont.attr("class","dropdown-item");
+    cont.attr("class","dropdown-item continent-drop");
     cont.attr('data-contGeoName', continentCode);
     contList.append(cont);
   }
@@ -65,4 +65,58 @@ $(".start-btn").on("click", function () {
 })
 
 var contInstructions = $("<h3>" + "Choose a continent: " + "</h3>")
+contInstructions.attr("id","instruc-1");
+contInstructions.attr("style","display:block")
 $("#instructions").append(contInstructions);
+
+// saving continent user selected
+var continentChosen;
+
+
+
+$(".continent-drop").on("click", function (){
+  continentChosen = $(this).attr("data-contgeoname");
+  console.log(continentChosen);
+
+  var countryUrl = "https://api.teleport.org/api/continents/geonames:" + continentChosen + "/countries/";
+
+  $.ajax({
+    url: countryUrl,
+    method: "GET"
+  }).then (function (countries){
+    console.log(countries);
+    console.log(countries._links["country:items"][1])
+    var countryList = $('<div>')
+    countryList.attr("aria-labelledby","dropdownMenuButton")
+    countryList.attr("class","dropdown-menu")
+    for(var i = 0; i < countries.count ; i++) {
+      console.log(i)
+      var country = $("<a href='#'>" + countries._links["country:items"][i].name + "</a>")
+      country.attr("class","dropdown-item country-drop");
+      console.log(country)
+      countryList.append(country);
+    }
+    var Countries = "Countries"
+    var countryBtn = dropDownBtn(Countries);
+    $("#country").append(countryBtn);
+    $("#country").append(countryList);
+
+  })
+  $("#instruc-1").attr("style","display:none")
+  var countryInstructions = $("<h3>" + "Choose a country: " + "</h3>")
+  countryInstructions.attr("id","instruc-2");
+  countryInstructions.attr("style","display:block");
+  $("#instructions").append(countryInstructions);
+})
+
+function dropDownBtn (name) {
+  var dropBtn = $("<button>")
+  dropBtn.attr("class", "btn btn-secondary dropdown-toggle");
+  dropBtn.attr("type","button");
+  dropBtn.attr("id","dropdownMenuButton");
+  dropBtn.attr("data-toggle","dropdown");
+  dropBtn.attr("aria-haspopup","true");
+  dropBtn.attr("aria-expanded", "false");
+  dropBtn.text(name);
+  return dropBtn;
+}
