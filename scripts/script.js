@@ -51,6 +51,20 @@ $.ajax(settings).done(function (response) {
   console.log(response);
 });
 
+var settings2 = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=us&sort=population",
+  "method": "GET",
+  "headers": {
+    "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
+    "x-rapidapi-key": "6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1"
+  }
+}
+
+$.ajax(settings2).done(function (response) {
+  console.log(response);
+});
 
 var continentsObj = { AF: 'Africa', AN: 'Antarctica', AS: 'Asia', EU: 'Europe', NA: 'North America', OC: 'Australia', SA: 'South America' }
 var continentsObj = {
