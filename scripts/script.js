@@ -53,21 +53,30 @@ $.ajax(settings).done(function(response) {
 });
 
 var settings2 = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=us&sort=population",
-  "method": "GET",
-  "headers": {
+  async: true,
+  crossDomain: true,
+  url:
+    "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=us&sort=population",
+  method: "GET",
+  headers: {
     "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
     "x-rapidapi-key": "6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1"
   }
-}
+};
 
-$.ajax(settings2).done(function (response) {
+$.ajax(settings2).done(function(response) {
   console.log(response);
 });
 
-var continentsObj = { AF: 'Africa', AN: 'Antarctica', AS: 'Asia', EU: 'Europe', NA: 'North America', OC: 'Australia', SA: 'South America' }
+var continentsObj = {
+  AF: "Africa",
+  AN: "Antarctica",
+  AS: "Asia",
+  EU: "Europe",
+  NA: "North America",
+  OC: "Australia",
+  SA: "South America"
+};
 var continentsObj = {
   AF: "Africa",
   AN: "Antarctica",
@@ -97,19 +106,11 @@ function RenderContinents() {
   }
   $("#continent").append(contList);
 }
-<<<<<<< HEAD
-RenderContinenets();
+RenderContinents();
 $("li").on("click", function(event) {
   console.log($(this).attr("data-GeoName"));
   console.log(event);
 });
-=======
-RenderContinents();
-$("li").on("click", function (event) {
-  console.log($(this).attr('data-GeoName'))
-  console.log(event)
-})
->>>>>>> 58ca5836590187162345df02a97914f2f5df63ef
 // function RenderCities() {
 //   var cityArray = Object.values(citiesObj)
 //   console.log(contArray)
@@ -201,7 +202,7 @@ function dropDownBtn(name) {
   dropBtn.attr("data-toggle", "dropdown");
   dropBtn.attr("aria-haspopup", "true");
   dropBtn.attr("aria-expanded", "false");
-  dropBtn.attr("style","margin: 14px 0; padding: 0 10.5px")
+  dropBtn.attr("style", "margin: 14px 0; padding: 0 10.5px");
   dropBtn.text(name);
   return dropBtn;
 }
@@ -232,9 +233,8 @@ function cityFacts() {
 }
 cityFacts();
 
-
 //clears search history from local storage
-$("#clearBtn").on("click", function (event) {
-    console.log(localStorage);
-    localStorage.clear();
+$("#clearBtn").on("click", function(event) {
+  console.log(localStorage);
+  localStorage.clear();
 });
