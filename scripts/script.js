@@ -22,39 +22,11 @@ $.ajax({
   console.log(response);
 });
 
-//
-
-// //API call for cities
-// var cityQueryURL = "https://wft-geo-db.p.mashape.com/v1/geo/cities";
-
-// $.ajax({
-//   url: cityQueryURL,
-//   method: "GET"
-// }).then(function (response) {
-//   console.log(response);
-// });
-// 6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1
-// //
-
-var settings = {
+// Ajax call to pull top 10 cities based on population by country Id
+var citySearchApi = {
   "async": true,
   "crossDomain": true,
-  "url": "https://andruxnet-world-cities-v1.p.rapidapi.com/?query=france&searchby=country",
-  "method": "GET",
-  "headers": {
-    "x-rapidapi-host": "andruxnet-world-cities-v1.p.rapidapi.com",
-    "x-rapidapi-key": "6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1"
-  }
-}
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-
-var settings2 = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=us&sort=population",
+  "url": "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=us&sort=-population",
   "method": "GET",
   "headers": {
     "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
@@ -62,7 +34,7 @@ var settings2 = {
   }
 }
 
-$.ajax(settings2).done(function (response) {
+$.ajax(citySearchApi).done(function (response) {
   console.log(response);
 });
 
@@ -101,25 +73,7 @@ $("li").on("click", function (event) {
   console.log($(this).attr('data-GeoName'))
   console.log(event)
 })
-// function RenderCities() {
-//   var cityArray = Object.values(citiesObj)
-//   console.log(contArray)
-//   var contKeys = Object.keys(citiesObj)
-//   console.log(contKeys)
-//   for (var continentCode in citiesObj) {
-//     console.log("code", continentCode)
-//     console.log("continent", citiesObj[continentCode])
-//     var contList = $('<ul>')
-//     $("#continent").append(contList);
-//     var cont = $("<li>" + citiesObj[continentCode] + "</li>").attr('data-contGeoName', continentCode)
-//     $("#continent").append(cont);
-//   }
-// }
-// RenderCities();
-// $("li").on("click", function (event) {
-//   console.log($(this).attr('data-GeoName'))
-//   console.log(event)
-// })
+
 RenderContinents();
 
 $("li").on("click", function (event) {
@@ -192,7 +146,7 @@ function dropDownBtn(name) {
   dropBtn.attr("data-toggle", "dropdown");
   dropBtn.attr("aria-haspopup", "true");
   dropBtn.attr("aria-expanded", "false");
-  dropBtn.attr("style","margin: 14px 0; padding: 0 10.5px")
+  dropBtn.attr("style", "margin: 14px 0; padding: 0 10.5px")
   dropBtn.text(name);
   return dropBtn;
 }
@@ -226,6 +180,6 @@ cityFacts();
 
 //clears search history from local storage
 $("#clearBtn").on("click", function (event) {
-    console.log(localStorage);
-    localStorage.clear();
+  console.log(localStorage);
+  localStorage.clear();
 });
