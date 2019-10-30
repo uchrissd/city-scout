@@ -178,6 +178,7 @@ function dropDownBtn(name) {
   dropBtn.attr("data-toggle", "dropdown");
   dropBtn.attr("aria-haspopup", "true");
   dropBtn.attr("aria-expanded", "false");
+  dropBtn.attr("style","margin: 14px 0; padding: 0 10.5px")
   dropBtn.text(name);
   return dropBtn;
 }
