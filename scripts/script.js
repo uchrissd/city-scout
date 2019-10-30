@@ -92,9 +92,7 @@ $("li").on("click", function (event) {
 //   console.log($(this).attr('data-GeoName'))
 //   console.log(event)
 // })
-RenderContinents();
 
-$("li").on("click", function(event) {
 
 RenderContinents();
 $("li").on("click", function (event) {
@@ -205,48 +203,47 @@ $("#clearBtn").on("click", function (event) {
   localStorage.clear();
 });
 
-$("#searchBtn").on("click",function(){
-  $("#dropdown-container").attr("style","display:none");
-  
+$("#searchBtn").on("click", function () {
+  $("#dropdown-container").attr("style", "display:none");
+
   var scoresUrl = "https://api.teleport.org/api/urban_areas/slug:atlanta/scores/";
   var imgUrl = "https://api.teleport.org/api/urban_areas/slug:atlanta/images/";
 
   var cityName = $("<h2>" + "Atlanta" + "</h2>");
-  cityName.attr("class","header");
+  cityName.attr("class", "header");
   var cardHorizontal = $("<div>");
-  cardHorizontal.attr("class","card horizontal");
+  cardHorizontal.attr("class", "card horizontal");
   var imgDiv = $("<div>");
-  imgDiv.attr("class","card-image");
+  imgDiv.attr("class", "card-image");
   var img = $("<img>");
- 
+
   $.ajax({
-    url:imgUrl,
+    url: imgUrl,
     method: "GET"
-  }).then (function (response){
-    console.log(response) 
+  }).then(function (response) {
+    console.log(response)
     img.attr("src", response.photos[0].image.web)
     imgDiv.append(img);
     cardHorizontal.append(imgDiv);
-  $("#city-intro").append(cityName);
-  $("#city-intro").append(cardHorizontal);
+    $("#city-intro").append(cityName);
+    $("#city-intro").append(cardHorizontal);
   })
-  
+
   var cardSummary = $("<div>")
-  cardSummary.attr("class","card-stacked");
+  cardSummary.attr("class", "card-stacked");
 
   var cardContent = $("<div>");
-  cardContent.attr("class","card-content");
+  cardContent.attr("class", "card-content");
 
   $.ajax({
     url: scoresUrl,
     method: "GET"
-  }).then (function (response){
+  }).then(function (response) {
     console.log(response);
     cardContent.append(response.summary);
     cardSummary.append(cardContent);
     cardHorizontal.append(cardSummary);
   })
-  
 });
 
 // function createCityCard (city){
@@ -258,8 +255,3 @@ $("#searchBtn").on("click",function(){
 //   imgDiv.attr("class","card-image");
 //   var img = $("<img>");
 //   img.att
-
-
-$("#searchBtn").on("click", function () {
-  $("#dropdown-container").attr("style", "display:none")
-})
