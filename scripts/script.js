@@ -24,6 +24,34 @@ $.ajax({
 
 //
 
+// //API call for cities
+// var cityQueryURL = "https://wft-geo-db.p.mashape.com/v1/geo/cities";
+
+// $.ajax({
+//   url: cityQueryURL,
+//   method: "GET"
+// }).then(function (response) {
+//   console.log(response);
+// });
+// 6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1
+// //
+
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://andruxnet-world-cities-v1.p.rapidapi.com/?query=france&searchby=country",
+  "method": "GET",
+  "headers": {
+    "x-rapidapi-host": "andruxnet-world-cities-v1.p.rapidapi.com",
+    "x-rapidapi-key": "6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1"
+  }
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+
+
 var continentsObj = { AF: 'Africa', AN: 'Antarctica', AS: 'Asia', EU: 'Europe', NA: 'North America', OC: 'Australia', SA: 'South America' }
 console.log(Object.keys(continentsObj));
 
@@ -43,6 +71,25 @@ function RenderContinenets() {
 }
 RenderContinenets();
 $("li").on("click", function (event) {
-  console.log(event.target.attr('data-geoname'))
+  console.log($(this).attr('data-GeoName'))
   console.log(event)
 })
+// function RenderCities() {
+//   var cityArray = Object.values(citiesObj)
+//   console.log(contArray)
+//   var contKeys = Object.keys(citiesObj)
+//   console.log(contKeys)
+//   for (var continentCode in citiesObj) {
+//     console.log("code", continentCode)
+//     console.log("continent", citiesObj[continentCode])
+//     var contList = $('<ul>')
+//     $("#continent").append(contList);
+//     var cont = $("<li>" + citiesObj[continentCode] + "</li>").attr('data-contGeoName', continentCode)
+//     $("#continent").append(cont);
+//   }
+// }
+// RenderCities();
+// $("li").on("click", function (event) {
+//   console.log($(this).attr('data-GeoName'))
+//   console.log(event)
+// })
