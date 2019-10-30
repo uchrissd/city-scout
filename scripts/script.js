@@ -3,13 +3,19 @@ var apiKEY = "9434dac94bff4079b3e8ae867f65cdda";
 console.log(apiKEY);
 var queryURL = "https://openexchangerates.org/api/latest.json?app_id=" + apiKEY;
 console.log(queryURL);
-
-$.ajax({
-  url: queryURL,
-  method: "GET"
-}).then(function(response) {
-  console.log(response);
-});
+//Function renders the currency change using the U.S. dollar as the base and appends to last page
+function renderCurrencyExchange() {
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response);
+    var currency = response.rates["USD"];
+    console.log("this is the currency", currency);
+    var currencyEl = $("<p>" + "U.S. Dollar exhange rate:" + currency + "</p>");
+    $("#currency-exchange").append(currencyEl);
+  });
+}
 
 //API call for continents
 var teleportAPIkey = "";
@@ -197,12 +203,15 @@ function cityFacts() {
       url: cityFactsURL,
       method: "GET"
     }).then(function(cityFactsResponse) {
-      var cityFacts = cityFactsResponse;
-      console.log("this is the city facts: ", cityFacts);
+      var cityPopulation = cityFactsResponse["population"];
+      console.log("this is the city facts: ", cityPopulation);
+      var cityPopulationEl = $(
+        "<p>" + "Population: " + cityPopulation + "</p>"
+      );
+      $("#currency-exchange").append(cityPopulationEl);
     });
   });
 }
-cityFacts();
 
 //clears search history from local storage
 $("#clearBtn").on("click", function(event) {
@@ -269,6 +278,8 @@ $("#searchBtn").on("click", function() {
 
     housingDiv.append(housingScoreDiv);
     $("#city-qualities").append(housingDiv);
+    renderCurrencyExchange();
+    cityFacts();
   });
 
   // creating the quality of life
