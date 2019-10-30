@@ -110,6 +110,7 @@ $(".continent-drop").on("click", function() {
     $("#country").append(countryList);
   });
   $("#instruc-1").attr("style", "display:none");
+  $("#dropdownMenuButton").attr("style", "display:none");
   var countryInstructions = $("<h3>" + "Choose a country: " + "</h3>");
   countryInstructions.attr("id", "instruc-2");
   countryInstructions.attr("style", "display:block");
@@ -153,3 +154,10 @@ function cityFacts() {
   });
 }
 cityFacts();
+
+
+//clears search history from local storage
+$("#clearBtn").on("click", function (event) {
+    console.log(localStorage);
+    localStorage.clear();
+});
