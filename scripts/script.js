@@ -82,7 +82,7 @@ function RenderContinents() {
   }
   $("#continent").append(contList);
 }
-RenderContinenets();
+RenderContinents();
 $("li").on("click", function (event) {
   console.log($(this).attr('data-GeoName'))
   console.log(event)
