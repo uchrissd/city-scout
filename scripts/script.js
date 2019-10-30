@@ -7,7 +7,7 @@ console.log(queryURL);
 $.ajax({
   url: queryURL,
   method: "GET"
-}).then(function (response) {
+}).then(function(response) {
   console.log(response);
 });
 
@@ -18,7 +18,7 @@ var continentQueryURL = "https://api.teleport.org/api/continents/";
 $.ajax({
   url: continentQueryURL,
   method: "GET"
-}).then(function (response) {
+}).then(function(response) {
   console.log(response);
 });
 
@@ -37,17 +37,18 @@ $.ajax({
 // //
 
 var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://andruxnet-world-cities-v1.p.rapidapi.com/?query=france&searchby=country",
-  "method": "GET",
-  "headers": {
+  async: true,
+  crossDomain: true,
+  url:
+    "https://andruxnet-world-cities-v1.p.rapidapi.com/?query=france&searchby=country",
+  method: "GET",
+  headers: {
     "x-rapidapi-host": "andruxnet-world-cities-v1.p.rapidapi.com",
     "x-rapidapi-key": "6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1"
   }
-}
+};
 
-$.ajax(settings).done(function (response) {
+$.ajax(settings).done(function(response) {
   console.log(response);
 });
 
@@ -96,11 +97,19 @@ function RenderContinents() {
   }
   $("#continent").append(contList);
 }
+<<<<<<< HEAD
+RenderContinenets();
+$("li").on("click", function(event) {
+  console.log($(this).attr("data-GeoName"));
+  console.log(event);
+});
+=======
 RenderContinents();
 $("li").on("click", function (event) {
   console.log($(this).attr('data-GeoName'))
   console.log(event)
 })
+>>>>>>> 58ca5836590187162345df02a97914f2f5df63ef
 // function RenderCities() {
 //   var cityArray = Object.values(citiesObj)
 //   console.log(contArray)
@@ -122,7 +131,7 @@ $("li").on("click", function (event) {
 // })
 RenderContinents();
 
-$("li").on("click", function (event) {
+$("li").on("click", function(event) {
   console.log(event.target.attr("data-geoname"));
   console.log(event);
 });
@@ -131,7 +140,7 @@ $("li").on("click", function (event) {
 var startContainer = $("#start-container");
 var dropDownContainer = $("#dropdown-container");
 
-$(".start-btn").on("click", function () {
+$(".start-btn").on("click", function() {
   startContainer.attr("style", "display:none");
   dropDownContainer.attr("style", "display:block");
 });
@@ -144,7 +153,7 @@ $("#instructions").append(contInstructions);
 // saving continent user selected
 var continentChosen;
 
-$(".continent-drop").on("click", function () {
+$(".continent-drop").on("click", function() {
   continentChosen = $(this).attr("data-contgeoname");
   console.log(continentChosen);
 
@@ -156,7 +165,7 @@ $(".continent-drop").on("click", function () {
   $.ajax({
     url: countryUrl,
     method: "GET"
-  }).then(function (countries) {
+  }).then(function(countries) {
     console.log(countries);
     console.log(countries._links["country:items"][1]);
     var countryList = $("<div>");
@@ -205,7 +214,7 @@ function cityFacts() {
   $.ajax({
     url: citySearch,
     method: "GET"
-  }).then(function (cityResponse) {
+  }).then(function(cityResponse) {
     var cityGeoId =
       cityResponse._embedded["city:search-results"][0]._links["city:item"].href;
     console.log("this is the city id link: ", cityGeoId);
@@ -215,7 +224,7 @@ function cityFacts() {
     $.ajax({
       url: cityFactsURL,
       method: "GET"
-    }).then(function (cityFactsResponse) {
+    }).then(function(cityFactsResponse) {
       var cityFacts = cityFactsResponse;
       console.log("this is the city facts: ", cityFacts);
     });
