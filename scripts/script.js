@@ -97,19 +97,11 @@ function RenderContinents() {
   }
   $("#continent").append(contList);
 }
-<<<<<<< HEAD
-RenderContinenets();
-$("li").on("click", function(event) {
-  console.log($(this).attr("data-GeoName"));
-  console.log(event);
-});
-=======
 RenderContinents();
 $("li").on("click", function (event) {
   console.log($(this).attr('data-GeoName'))
   console.log(event)
 })
->>>>>>> 58ca5836590187162345df02a97914f2f5df63ef
 // function RenderCities() {
 //   var cityArray = Object.values(citiesObj)
 //   console.log(contArray)
@@ -240,5 +232,72 @@ $("#clearBtn").on("click", function (event) {
 });
 
 $("#searchBtn").on("click",function(){
-  $("#dropdown-container").attr("style","display:none")
-})
+  $("#dropdown-container").attr("style","display:none");
+  
+  var scoresUrl = "https://api.teleport.org/api/urban_areas/slug:atlanta/scores/";
+  var imgUrl = "https://api.teleport.org/api/urban_areas/slug:atlanta/images/";
+
+  var cityName = $("<h2>" + "Atlanta" + "</h2>");
+  cityName.attr("class","header");
+  var cardHorizontal = $("<div>");
+  cardHorizontal.attr("class","card horizontal");
+  var imgDiv = $("<div>");
+  imgDiv.attr("class","card-image");
+  var img = $("<img>");
+ 
+  $.ajax({
+    url:imgUrl,
+    method: "GET"
+  }).then (function (response){
+    console.log(response) 
+    img.attr("src", response.photos[0].image.web)
+    imgDiv.append(img);
+    cardHorizontal.append(imgDiv);
+  $("#city-intro").append(cityName);
+  $("#city-intro").append(cardHorizontal);
+  })
+  
+  var cardSummary = $("<div>")
+  cardSummary.attr("class","card-stacked");
+
+  var cardContent = $("<div>");
+  cardContent.attr("class","card-content");
+
+  $.ajax({
+    url: scoresUrl,
+    method: "GET"
+  }).then (function (response){
+    console.log(response);
+    cardContent.append(response.summary);
+    cardSummary.append(cardContent);
+    cardHorizontal.append(cardSummary);
+  })
+  
+});
+
+// function createCityCard (city){
+//   var cityName = $("<h2>" + city + "</h2>");
+//   cityName.attr("class","header");
+//   var cardHorizontal = $("<div>");
+//   cardHorizontal.attr("class","card horizontal");
+//   var imgDiv = $("<div>");
+//   imgDiv.attr("class","card-image");
+//   var img = $("<img>");
+//   img.att
+
+// // }
+// <h2 class="header">Horizontal Card</h2>
+//   <div class="card horizontal">
+//     <div class="card-image">
+//       <img src="https://lorempixel.com/100/190/nature/6">
+//       </div>
+//       <div class="card-stacked">
+//         <div class="card-content">
+//           <p>I am a very simple card. I am good at containing small bits of information.</p>
+//         </div>
+//         <div class="card-action">
+//           <a href="#">This is a link</a>
+//         </div>
+//       </div>
+//     </div> 
+//   </div>
