@@ -7,7 +7,7 @@ console.log(queryURL);
 $.ajax({
   url: queryURL,
   method: "GET"
-}).then(function(response) {
+}).then(function (response) {
   console.log(response);
 });
 
@@ -18,44 +18,15 @@ var continentQueryURL = "https://api.teleport.org/api/continents/";
 $.ajax({
   url: continentQueryURL,
   method: "GET"
-}).then(function(response) {
+}).then(function (response) {
   console.log(response);
 });
 
-//
-
-// //API call for cities
-// var cityQueryURL = "https://wft-geo-db.p.mashape.com/v1/geo/cities";
-
-// $.ajax({
-//   url: cityQueryURL,
-//   method: "GET"
-// }).then(function (response) {
-//   console.log(response);
-// });
-// 6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1
-// //
-
-var settings = {
-  async: true,
-  crossDomain: true,
-  url:
-    "https://andruxnet-world-cities-v1.p.rapidapi.com/?query=france&searchby=country",
-  method: "GET",
-  headers: {
-    "x-rapidapi-host": "andruxnet-world-cities-v1.p.rapidapi.com",
-    "x-rapidapi-key": "6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1"
-  }
-};
-
-$.ajax(settings).done(function(response) {
-  console.log(response);
-});
-
-var settings2 = {
+// Ajax call to pull top 10 cities based on population by country Id
+var citySearchApi = {
   "async": true,
   "crossDomain": true,
-  "url": "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=us&sort=population",
+  "url": "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=us&sort=-population",
   "method": "GET",
   "headers": {
     "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
@@ -63,7 +34,7 @@ var settings2 = {
   }
 }
 
-$.ajax(settings2).done(function (response) {
+$.ajax(citySearchApi).done(function (response) {
   console.log(response);
 });
 
@@ -99,7 +70,7 @@ function RenderContinents() {
 }
 <<<<<<< HEAD
 RenderContinenets();
-$("li").on("click", function(event) {
+$("li").on("click", function (event) {
   console.log($(this).attr("data-GeoName"));
   console.log(event);
 });
@@ -109,6 +80,9 @@ $("li").on("click", function (event) {
   console.log($(this).attr('data-GeoName'))
   console.log(event)
 })
+<<<<<<< HEAD
+
+=======
 >>>>>>> 58ca5836590187162345df02a97914f2f5df63ef
 // function RenderCities() {
 //   var cityArray = Object.values(citiesObj)
@@ -129,9 +103,10 @@ $("li").on("click", function (event) {
 //   console.log($(this).attr('data-GeoName'))
 //   console.log(event)
 // })
+>>>>>>> 052aa03813301ec811388dc98136912d623c7464
 RenderContinents();
 
-$("li").on("click", function(event) {
+$("li").on("click", function (event) {
   console.log(event.target.attr("data-geoname"));
   console.log(event);
 });
@@ -140,7 +115,7 @@ $("li").on("click", function(event) {
 var startContainer = $("#start-container");
 var dropDownContainer = $("#dropdown-container");
 
-$(".start-btn").on("click", function() {
+$(".start-btn").on("click", function () {
   startContainer.attr("style", "display:none");
   dropDownContainer.attr("style", "display:block");
 });
@@ -153,7 +128,7 @@ $("#instructions").append(contInstructions);
 // saving continent user selected
 var continentChosen;
 
-$(".continent-drop").on("click", function() {
+$(".continent-drop").on("click", function () {
   continentChosen = $(this).attr("data-contgeoname");
   console.log(continentChosen);
 
@@ -165,7 +140,7 @@ $(".continent-drop").on("click", function() {
   $.ajax({
     url: countryUrl,
     method: "GET"
-  }).then(function(countries) {
+  }).then(function (countries) {
     console.log(countries);
     console.log(countries._links["country:items"][1]);
     var countryList = $("<div>");
@@ -201,7 +176,7 @@ function dropDownBtn(name) {
   dropBtn.attr("data-toggle", "dropdown");
   dropBtn.attr("aria-haspopup", "true");
   dropBtn.attr("aria-expanded", "false");
-  dropBtn.attr("style","margin: 14px 0; padding: 0 10.5px")
+  dropBtn.attr("style", "margin: 14px 0; padding: 0 10.5px")
   dropBtn.text(name);
   return dropBtn;
 }
@@ -214,7 +189,7 @@ function cityFacts() {
   $.ajax({
     url: citySearch,
     method: "GET"
-  }).then(function(cityResponse) {
+  }).then(function (cityResponse) {
     var cityGeoId =
       cityResponse._embedded["city:search-results"][0]._links["city:item"].href;
     console.log("this is the city id link: ", cityGeoId);
@@ -224,7 +199,7 @@ function cityFacts() {
     $.ajax({
       url: cityFactsURL,
       method: "GET"
-    }).then(function(cityFactsResponse) {
+    }).then(function (cityFactsResponse) {
       var cityFacts = cityFactsResponse;
       console.log("this is the city facts: ", cityFacts);
     });
@@ -235,10 +210,10 @@ cityFacts();
 
 //clears search history from local storage
 $("#clearBtn").on("click", function (event) {
-    console.log(localStorage);
-    localStorage.clear();
+  console.log(localStorage);
+  localStorage.clear();
 });
 
-$("#searchBtn").on("click",function(){
-  $("#dropdown-container").attr("style","display:none")
+$("#searchBtn").on("click", function () {
+  $("#dropdown-container").attr("style", "display:none")
 })
