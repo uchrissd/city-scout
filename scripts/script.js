@@ -68,12 +68,42 @@ function RenderContinents() {
   }
   $("#continent").append(contList);
 }
+<<<<<<< HEAD
+RenderContinenets();
+$("li").on("click", function (event) {
+  console.log($(this).attr("data-GeoName"));
+  console.log(event);
+});
+=======
 RenderContinents();
 $("li").on("click", function (event) {
   console.log($(this).attr('data-GeoName'))
   console.log(event)
 })
+<<<<<<< HEAD
 
+=======
+>>>>>>> 58ca5836590187162345df02a97914f2f5df63ef
+// function RenderCities() {
+//   var cityArray = Object.values(citiesObj)
+//   console.log(contArray)
+//   var contKeys = Object.keys(citiesObj)
+//   console.log(contKeys)
+//   for (var continentCode in citiesObj) {
+//     console.log("code", continentCode)
+//     console.log("continent", citiesObj[continentCode])
+//     var contList = $('<ul>')
+//     $("#continent").append(contList);
+//     var cont = $("<li>" + citiesObj[continentCode] + "</li>").attr('data-contGeoName', continentCode)
+//     $("#continent").append(cont);
+//   }
+// }
+// RenderCities();
+// $("li").on("click", function (event) {
+//   console.log($(this).attr('data-GeoName'))
+//   console.log(event)
+// })
+>>>>>>> 052aa03813301ec811388dc98136912d623c7464
 RenderContinents();
 
 $("li").on("click", function (event) {
@@ -183,3 +213,7 @@ $("#clearBtn").on("click", function (event) {
   console.log(localStorage);
   localStorage.clear();
 });
+
+$("#searchBtn").on("click", function () {
+  $("#dropdown-container").attr("style", "display:none")
+})
