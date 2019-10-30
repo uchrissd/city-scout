@@ -177,6 +177,7 @@ $(".continent-drop").on("click", function () {
     $("#country").append(countryList);
   });
   $("#instruc-1").attr("style", "display:none");
+  $("#dropdownMenuButton").attr("style", "display:none");
   var countryInstructions = $("<h3>" + "Choose a country: " + "</h3>");
   countryInstructions.attr("id", "instruc-2");
   countryInstructions.attr("style", "display:block");
@@ -191,6 +192,7 @@ function dropDownBtn(name) {
   dropBtn.attr("data-toggle", "dropdown");
   dropBtn.attr("aria-haspopup", "true");
   dropBtn.attr("aria-expanded", "false");
+  dropBtn.attr("style","margin: 14px 0; padding: 0 10.5px")
   dropBtn.text(name);
   return dropBtn;
 }
@@ -220,3 +222,10 @@ function cityFacts() {
   });
 }
 cityFacts();
+
+
+//clears search history from local storage
+$("#clearBtn").on("click", function (event) {
+    console.log(localStorage);
+    localStorage.clear();
+});
