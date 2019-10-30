@@ -238,3 +238,7 @@ $("#clearBtn").on("click", function (event) {
     console.log(localStorage);
     localStorage.clear();
 });
+
+$("#searchBtn").on("click",function(){
+  $("#dropdown-container").attr("style","display:none")
+})
