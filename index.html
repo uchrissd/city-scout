@@ -11,28 +11,62 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <style>
+  .dropdown-content{
+   width: max-content !important;
+   height:auto !important;
+  }
+</style>
 </head>
 
 <body>
 
   <header>
-    <nav>
-      <h1>Travel Rich</h1>
+    <nav class="center">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Travel Rich</a>
+          </div>
     </nav>
   </header>
 
   <div id = "start-container">
     <div class = "row">
       <div class = "col s12">
+          <div class="card center">
+              <div class="card-image" style="margin-left:23%">
+                <img src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" style="width:70%">
+                <span class="card-title">Greetings, Fellow Earthling!</span>
+              </div>
+              <div class="card-content">
+                <p>This is an app to assist travelers to get basic information on their destination.</p>
+              </div>
+              <div class="card-action">
+                <a class="waves-effect waves-light btn start-btn">Get Started</a>
+              </div>
+            </div>
       </div>
     </div>
   </div> 
-  <div id = "dropdown-container">
+
+  <div id = "dropdown-container" style="display:none">
     <div class = "row" id = "instructions"></div>
     <div class = "row">
-      <div class = "col s4" id ="continent"></div>
-      <div class = "col s4" id ="country"></div>
+      <div class = "col s4 input-field dropdown" id ="continent">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Continents
+          </button>
+      </div>
+      <div class = "col s4 dropdown" id ="country">
+          
+      </div>
       <div class = "col s4" id ="city"></div>
     </div>
     <div class = "row">
@@ -41,6 +75,7 @@
       </div>
     </div>
   </div>
+
   <div id = "cityinfo-container">
     <div class = "row">
       <div class = "col s6"></div>
@@ -50,11 +85,18 @@
       <div class = "col s9"></div>
       <div class = "col s3"></div>
     </div>
+    <div class ="row">
+      <div class = "col s12" id ="nav-btn"></div>
+    </div>
   </div>
-  <div id = "search-history"></div>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
+  <!-- <div id = "search-history">
+
+  </div> -->
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="scripts/script.js" text="text/javascript"></script>
 
 </body>
