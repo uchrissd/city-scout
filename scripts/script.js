@@ -251,7 +251,27 @@ $("#searchBtn").on("click", function() {
     cardContent.append(response.summary);
     cardSummary.append(cardContent);
     cardHorizontal.append(cardSummary);
+    // creating the quality of life
+    var housing = $("<p>" + response.categories[0].name + "</p>");
+    var housingDiv = $("<div>");
+    housingDiv.attr("class", "score-container");
+
+    var housingScoreDiv = $("<div>");
+    housingScoreDiv.attr("class", "stats");
+
+    var housingScore = response.categories[0].score_out_of_10;
+    housingScore = Math.round(housingScore);
+    housingScoreDiv.text(housingScore + "/10");
+    housingScoreDiv.attr(
+      "style",
+      "width:" + housingScore * 10 + "%; background-color:red"
+    );
+
+    housingDiv.append(housingScoreDiv);
+    $("#city-qualities").append(housingDiv);
   });
+
+  // creating the quality of life
 });
 
 // function createCityCard (city){
