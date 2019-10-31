@@ -8,7 +8,7 @@ function renderCurrencyExchange() {
   $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function (response) {
+  }).then(function(response) {
     console.log(response);
     var currency = response.rates["USD"];
     console.log("this is the currency", currency);
@@ -24,7 +24,7 @@ var continentQueryURL = "https://api.teleport.org/api/continents/";
 $.ajax({
   url: continentQueryURL,
   method: "GET"
-}).then(function (response) {
+}).then(function(response) {
   console.log(response);
 });
 
@@ -41,7 +41,7 @@ var citySearchApi = {
   }
 };
 
-$.ajax(citySearchApi).done(function (response) {
+$.ajax(citySearchApi).done(function(response) {
   console.log(response);
 });
 
@@ -84,7 +84,7 @@ function RenderContinents() {
   $("#continent").append(contList);
 }
 RenderContinents();
-$("li").on("click", function (event) {
+$("li").on("click", function(event) {
   console.log($(this).attr("data-GeoName"));
   console.log(event);
 });
@@ -109,7 +109,7 @@ $("li").on("click", function (event) {
 // })
 
 RenderContinents();
-$("li").on("click", function (event) {
+$("li").on("click", function(event) {
   console.log(event.target.attr("data-geoname"));
   console.log(event);
 });
@@ -118,7 +118,7 @@ $("li").on("click", function (event) {
 var startContainer = $("#start-container");
 var dropDownContainer = $("#dropdown-container");
 
-$(".start-btn").on("click", function () {
+$(".start-btn").on("click", function() {
   startContainer.attr("style", "display:none");
   dropDownContainer.attr("style", "display:block");
 });
@@ -131,7 +131,7 @@ $("#instructions").append(contInstructions);
 // saving continent user selected
 var continentChosen;
 
-$(".continent-drop").on("click", function () {
+$(".continent-drop").on("click", function() {
   continentChosen = $(this).attr("data-contgeoname");
   console.log(continentChosen);
 
@@ -143,7 +143,7 @@ $(".continent-drop").on("click", function () {
   $.ajax({
     url: countryUrl,
     method: "GET"
-  }).then(function (countries) {
+  }).then(function(countries) {
     console.log(countries);
     console.log(countries._links["country:items"][1]);
     var countryList = $("<div>");
@@ -192,7 +192,7 @@ function cityFacts() {
   $.ajax({
     url: citySearch,
     method: "GET"
-  }).then(function (cityResponse) {
+  }).then(function(cityResponse) {
     var cityGeoId =
       cityResponse._embedded["city:search-results"][0]._links["city:item"].href;
     console.log("this is the city id link: ", cityGeoId);
@@ -202,24 +202,24 @@ function cityFacts() {
     $.ajax({
       url: cityFactsURL,
       method: "GET"
-    }).then(function (cityFactsResponse) {
+    }).then(function(cityFactsResponse) {
       var cityPopulation = cityFactsResponse["population"];
       console.log("this is the city facts: ", cityPopulation);
       var cityPopulationEl = $(
         "<p>" + "Population: " + cityPopulation + "</p>"
       );
-      $("#currency-exchange").append(cityPopulationEl);
+      $("#population").append(cityPopulationEl);
     });
   });
 }
 
 //clears search history from local storage
-$("#clearBtn").on("click", function (event) {
+$("#clearBtn").on("click", function(event) {
   console.log(localStorage);
   localStorage.clear();
 });
 
-$("#searchBtn").on("click", function () {
+$("#searchBtn").on("click", function() {
   $("#dropdown-container").attr("style", "display:none");
 
   var scoresUrl =
@@ -237,7 +237,7 @@ $("#searchBtn").on("click", function () {
   $.ajax({
     url: imgUrl,
     method: "GET"
-  }).then(function (response) {
+  }).then(function(response) {
     console.log(response);
     img.attr("src", response.photos[0].image.web);
     imgDiv.append(img);
@@ -255,7 +255,7 @@ $("#searchBtn").on("click", function () {
   $.ajax({
     url: scoresUrl,
     method: "GET"
-  }).then(function (response) {
+  }).then(function(response) {
     console.log(response);
     cardContent.append(response.summary);
     cardSummary.append(cardContent);
@@ -388,7 +388,7 @@ $("#searchBtn").on("click", function () {
     costOfLivingDiv.append(costOfLiving);
     costOfLivingDiv.append(costOfLivingScoreDiv);
     $("#city-qualities").append(costOfLivingDiv);
-    
+
     commuteDiv.append(commute);
     commuteDiv.append(commuteScoreDiv);
     $("#city-qualities").append(commuteDiv);
@@ -412,7 +412,6 @@ $("#searchBtn").on("click", function () {
     outdoorsDiv.append(outdoors);
     outdoorsDiv.append(outdoorsScoreDiv);
     $("#city-qualities").append(outdoorsDiv);
-
 
     renderCurrencyExchange();
     cityFacts();
