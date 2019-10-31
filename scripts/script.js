@@ -8,7 +8,7 @@ function renderCurrencyExchange() {
   $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     console.log(response);
     var currency = response.rates["USD"];
     console.log("this is the currency", currency);
@@ -24,7 +24,7 @@ var continentQueryURL = "https://api.teleport.org/api/continents/";
 $.ajax({
   url: continentQueryURL,
   method: "GET"
-}).then(function(response) {
+}).then(function (response) {
   console.log(response);
 });
 
@@ -41,7 +41,7 @@ var citySearchApi = {
   }
 };
 
-$.ajax(citySearchApi).done(function(response) {
+$.ajax(citySearchApi).done(function (response) {
   console.log(response);
 });
 
@@ -84,7 +84,7 @@ function RenderContinents() {
   $("#continent").append(contList);
 }
 RenderContinents();
-$("li").on("click", function(event) {
+$("li").on("click", function (event) {
   console.log($(this).attr("data-GeoName"));
   console.log(event);
 });
@@ -109,7 +109,7 @@ $("li").on("click", function(event) {
 // })
 
 RenderContinents();
-$("li").on("click", function(event) {
+$("li").on("click", function (event) {
   console.log(event.target.attr("data-geoname"));
   console.log(event);
 });
@@ -118,7 +118,7 @@ $("li").on("click", function(event) {
 var startContainer = $("#start-container");
 var dropDownContainer = $("#dropdown-container");
 
-$(".start-btn").on("click", function() {
+$(".start-btn").on("click", function () {
   startContainer.attr("style", "display:none");
   dropDownContainer.attr("style", "display:block");
 });
@@ -131,7 +131,7 @@ $("#instructions").append(contInstructions);
 // saving continent user selected
 var continentChosen;
 
-$(".continent-drop").on("click", function() {
+$(".continent-drop").on("click", function () {
   continentChosen = $(this).attr("data-contgeoname");
   console.log(continentChosen);
 
@@ -143,7 +143,7 @@ $(".continent-drop").on("click", function() {
   $.ajax({
     url: countryUrl,
     method: "GET"
-  }).then(function(countries) {
+  }).then(function (countries) {
     console.log(countries);
     console.log(countries._links["country:items"][1]);
     var countryList = $("<div>");
@@ -192,7 +192,7 @@ function cityFacts() {
   $.ajax({
     url: citySearch,
     method: "GET"
-  }).then(function(cityResponse) {
+  }).then(function (cityResponse) {
     var cityGeoId =
       cityResponse._embedded["city:search-results"][0]._links["city:item"].href;
     console.log("this is the city id link: ", cityGeoId);
@@ -202,7 +202,7 @@ function cityFacts() {
     $.ajax({
       url: cityFactsURL,
       method: "GET"
-    }).then(function(cityFactsResponse) {
+    }).then(function (cityFactsResponse) {
       var cityPopulation = cityFactsResponse["population"];
       console.log("this is the city facts: ", cityPopulation);
       var cityPopulationEl = $(
@@ -214,12 +214,12 @@ function cityFacts() {
 }
 
 //clears search history from local storage
-$("#clearBtn").on("click", function(event) {
+$("#clearBtn").on("click", function (event) {
   console.log(localStorage);
   localStorage.clear();
 });
 
-$("#searchBtn").on("click", function() {
+$("#searchBtn").on("click", function () {
   $("#dropdown-container").attr("style", "display:none");
 
   var scoresUrl =
@@ -237,7 +237,7 @@ $("#searchBtn").on("click", function() {
   $.ajax({
     url: imgUrl,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     console.log(response);
     img.attr("src", response.photos[0].image.web);
     imgDiv.append(img);
@@ -255,7 +255,7 @@ $("#searchBtn").on("click", function() {
   $.ajax({
     url: scoresUrl,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     console.log(response);
     cardContent.append(response.summary);
     cardSummary.append(cardContent);
@@ -276,8 +276,144 @@ $("#searchBtn").on("click", function() {
       "width:" + housingScore * 10 + "%; background-color:red"
     );
 
+    var costOfLiving = $("<p>" + response.categories[1].name + "</p>");
+    var costOfLivingDiv = $("<div>");
+    costOfLivingDiv.attr("class", "score-container");
+
+    var costOfLivingScoreDiv = $("<div>");
+    costOfLivingScoreDiv.attr("class", "stats");
+
+    var costOfLivingScore = response.categories[1].score_out_of_10;
+    costOfLivingScore = Math.round(costOfLivingScore);
+    costOfLivingScoreDiv.text(costOfLivingScore + "/10");
+    costOfLivingScoreDiv.attr(
+      "style",
+      "width:" + costOfLivingScore * 10 + "%; background-color:red"
+    );
+
+    var commute = $("<p>" + response.categories[5].name + "</p>");
+    var commuteDiv = $("<div>");
+    commuteDiv.attr("class", "score-container");
+
+    var commuteScoreDiv = $("<div>");
+    commuteScoreDiv.attr("class", "stats");
+
+    var commuteScore = response.categories[5].score_out_of_10;
+    commuteScore = Math.round(commuteScore);
+    commuteScoreDiv.text(commuteScore + "/10");
+    commuteScoreDiv.attr(
+      "style",
+      "width:" + commuteScore * 10 + "%; background-color:red"
+    );
+
+    var safety = $("<p>" + response.categories[7].name + "</p>");
+    var safetyDiv = $("<div>");
+    safetyDiv.attr("class", "score-container");
+
+    var safetyScoreDiv = $("<div>");
+    safetyScoreDiv.attr("class", "stats");
+
+    var safetyScore = response.categories[7].score_out_of_10;
+    safetyScore = Math.round(safetyScore);
+    safetyScoreDiv.text(safetyScore + "/10");
+    safetyScoreDiv.attr(
+      "style",
+      "width:" + safetyScore * 10 + "%; background-color:red"
+    );
+
+    var healthcare = $("<p>" + response.categories[8].name + "</p>");
+    var healthcareDiv = $("<div>");
+    healthcareDiv.attr("class", "score-container");
+
+    var healthcareScoreDiv = $("<div>");
+    healthcareScoreDiv.attr("class", "stats");
+
+    var healthcareScore = response.categories[8].score_out_of_10;
+    healthcareScore = Math.round(healthcareScore);
+    healthcareScoreDiv.text(healthcareScore + "/10");
+    healthcareScoreDiv.attr(
+      "style",
+      "width:" + healthcareScore * 10 + "%; background-color:red"
+    );
+
+    var education = $("<p>" + response.categories[9].name + "</p>");
+    var educationDiv = $("<div>");
+    educationDiv.attr("class", "score-container");
+
+    var educationScoreDiv = $("<div>");
+    educationScoreDiv.attr("class", "stats");
+
+    var educationScore = response.categories[9].score_out_of_10;
+    educationScore = Math.round(educationScore);
+    educationScoreDiv.text(educationScore + "/10");
+    educationScoreDiv.attr(
+      "style",
+      "width:" + educationScore * 10 + "%; background-color:red"
+    );
+
+    var internetAccess = $("<p>" + response.categories[13].name + "</p>");
+    var internetAccessDiv = $("<div>");
+    internetAccessDiv.attr("class", "score-container");
+
+    var internetAccessScoreDiv = $("<div>");
+    internetAccessScoreDiv.attr("class", "stats");
+
+    var internetAccessScore = response.categories[13].score_out_of_10;
+    internetAccessScore = Math.round(internetAccessScore);
+    internetAccessScoreDiv.text(internetAccessScore + "/10");
+    internetAccessScoreDiv.attr(
+      "style",
+      "width:" + internetAccessScore * 10 + "%; background-color:red"
+    );
+
+    var outdoors = $("<p>" + response.categories[16].name + "</p>");
+    var outdoorsDiv = $("<div>");
+    outdoorsDiv.attr("class", "score-container");
+
+    var outdoorsScoreDiv = $("<div>");
+    outdoorsScoreDiv.attr("class", "stats");
+
+    var outdoorsScore = response.categories[16].score_out_of_10;
+    outdoorsScore = Math.round(outdoorsScore);
+    outdoorsScoreDiv.text(outdoorsScore + "/10");
+    outdoorsScoreDiv.attr(
+      "style",
+      "width:" + outdoorsScore * 10 + "%; background-color:red"
+    );
+
+    housingDiv.append(housing);
     housingDiv.append(housingScoreDiv);
     $("#city-qualities").append(housingDiv);
+
+    costOfLivingDiv.append(costOfLiving);
+    costOfLivingDiv.append(costOfLivingScoreDiv);
+    $("#city-qualities").append(costOfLivingDiv);
+    
+    commuteDiv.append(commute);
+    commuteDiv.append(commuteScoreDiv);
+    $("#city-qualities").append(commuteDiv);
+
+    safetyDiv.append(safety);
+    safetyDiv.append(safetyScoreDiv);
+    $("#city-qualities").append(safetyDiv);
+
+    healthcareDiv.append(healthcare);
+    healthcareDiv.append(healthcareScoreDiv);
+    $("#city-qualities").append(healthcareDiv);
+
+    educationDiv.append(education);
+    educationDiv.append(educationScoreDiv);
+    $("#city-qualities").append(educationDiv);
+
+    internetAccessDiv.append(internetAccess);
+    internetAccessDiv.append(internetAccessScoreDiv);
+    $("#city-qualities").append(internetAccessDiv);
+
+    outdoorsDiv.append(outdoors);
+    outdoorsDiv.append(outdoorsScoreDiv);
+    $("#city-qualities").append(outdoorsDiv);
+
+
     renderCurrencyExchange();
     cityFacts();
   });
