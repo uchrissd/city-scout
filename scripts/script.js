@@ -303,23 +303,22 @@ function goToNextPage(currency) {
     cardHorizontal.append(cardSummary);
     // creating the quality of life
     var housing = $("<p>" + response.categories[0].name + "</p>");
-    housing.attr("style", "background-color:white;")
-    
-    
+    housing.attr("style", "background-color:white;");
 
     var housingDiv = $("<div>");
     housingDiv.attr("class", "score-container");
 
     var housingScoreDiv = $("<div>");
     housingScoreDiv.attr("class", "stats");
-    
 
     var housingScore = response.categories[0].score_out_of_10;
     housingScore = Math.round(housingScore);
     housingScoreDiv.text(housingScore + "/10");
-    housingScoreDiv.attr("style", "width:" + housingScore * 10 + "%; background-color:red");
+    housingScoreDiv.attr(
+      "style",
+      "width:" + housingScore * 10 + "%; background-color:red"
+    );
     //housingScoreDiv.attr("style", "padding-top: 0px", "padding-bottom: 0px;");
-    
 
     var costOfLiving = $("<p>" + response.categories[1].name + "</p>");
     costOfLiving.attr("style", "background-color:white;");
@@ -435,7 +434,6 @@ function goToNextPage(currency) {
       "width:" + outdoorsScore * 10 + "%; background-color:red"
     );
 
-    
     housingDiv.append(housing);
     housingDiv.append(housingScoreDiv);
     $("#city-qualities").append(housingDiv);
@@ -483,5 +481,3 @@ function goToNextPage(currency) {
 //   imgDiv.attr("class","card-image");
 //   var img = $("<img>");
 //   img.att
-
-
