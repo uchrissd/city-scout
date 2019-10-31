@@ -228,8 +228,10 @@ $("#searchBtn").on("click", function() {
 
   var cityName = $("<h2>" + "Atlanta" + "</h2>");
   cityName.attr("class", "header");
+  cityName.attr("style","display:flex; justify-content:center")
   var cardHorizontal = $("<div>");
   cardHorizontal.attr("class", "card horizontal");
+  cardHorizontal.attr("style","display:flex; flex-direction:row")
   var imgDiv = $("<div>");
   imgDiv.attr("class", "card-image");
   var img = $("<img>");
