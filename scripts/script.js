@@ -1,20 +1,30 @@
+//Global variables
+var continentObject;
+var chosenCountry;
+var chosenCountryLink;
+var chosenCountryId;
+var currencyCode;
 //API call for currency exchange
 var apiKEY = "9434dac94bff4079b3e8ae867f65cdda";
 console.log(apiKEY);
 var queryURL = "https://openexchangerates.org/api/latest.json?app_id=" + apiKEY;
 console.log(queryURL);
 //Function renders the currency change using the U.S. dollar as the base and appends to last page
-function renderCurrencyExchange() {
+function renderCurrencyExchange(currencyCode) {
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
     console.log(response);
-    var currency = response.rates["USD"];
+    var currency = response.rates[currencyCode];
     console.log("this is the currency", currency);
-    var currencyEl = $("<p>" + "U.S. Dollar exhange rate:" + currency + "</p>");
-    $("#currency-exchange").append(currencyEl);
+    goToNextPage(currency);
   });
+}
+
+function createElementsForCityPage(currency) {
+  var currencyEl = $("<p>" + "U.S. Dollar exhange rate:" + currency + "</p>");
+  $("#currency-exchange").append(currencyEl);
 }
 
 //API call for continents
@@ -54,15 +64,7 @@ var continentsObj = {
   OC: "Australia",
   SA: "South America"
 };
-var continentsObj = {
-  AF: "Africa",
-  AN: "Antarctica",
-  AS: "Asia",
-  EU: "Europe",
-  NA: "North America",
-  OC: "Australia",
-  SA: "South America"
-};
+
 console.log(Object.keys(continentsObj));
 
 function RenderContinents() {
@@ -73,6 +75,7 @@ function RenderContinents() {
   var contList = $("<div>");
   contList.attr("aria-labelledby", "dropdownMenuButton");
   contList.attr("class", "dropdown-menu");
+
   for (var continentCode in continentsObj) {
     console.log("code", continentCode);
     console.log("continent", continentsObj[continentCode]);
@@ -129,6 +132,7 @@ contInstructions.attr("style", "display:block");
 $("#instructions").append(contInstructions);
 
 // saving continent user selected
+
 var continentChosen;
 
 $(".continent-drop").on("click", function() {
@@ -145,10 +149,12 @@ $(".continent-drop").on("click", function() {
     method: "GET"
   }).then(function(countries) {
     console.log(countries);
+    continentObject = countries;
     console.log(countries._links["country:items"][1]);
     var countryList = $("<div>");
     countryList.attr("aria-labelledby", "dropdownMenuButton");
     countryList.attr("class", "dropdown-menu");
+    countryList.attr("id", "dropdown-menu-countries");
     for (var i = 0; i < countries.count; i++) {
       console.log(i);
       var country = $(
@@ -162,6 +168,23 @@ $(".continent-drop").on("click", function() {
     var countryBtn = dropDownBtn(Countries);
     $("#country").append(countryBtn);
     $("#country").append(countryList);
+
+    //Click event to grab text value when country button is clicked
+    $(".country-drop").on("click", function() {
+      chosenCountry = $(this).text();
+      console.log(chosenCountry);
+      console.log(continentObject);
+      var countriesArray = continentObject._links["country:items"];
+      console.log(countriesArray);
+      for (var i = 0; i < countriesArray.length; i++) {
+        if (countriesArray[i].name === chosenCountry) {
+          chosenCountryLink = countriesArray[i].href;
+          console.log("country link", chosenCountryLink);
+        }
+      }
+      console.log("LOOK HERE: " + chosenCountryLink);
+      getCountryInfo(chosenCountryLink);
+    });
   });
   $("#instruc-1").attr("style", "display:none");
   $("#dropdownMenuButton").attr("style", "display:none");
@@ -170,6 +193,22 @@ $(".continent-drop").on("click", function() {
   countryInstructions.attr("style", "display:block");
   $("#instructions").append(countryInstructions);
 });
+
+function getCountryInfo(chosenCountryLink) {
+  $.ajax({
+    url: chosenCountryLink,
+    method: "GET"
+  }).then(function(countryInfoResponse) {
+    chosenCountryId = countryInfoResponse.iso_alpha2;
+    currencyCode = countryInfoResponse.currency_code;
+    console.log(chosenCountryId);
+    console.log(currencyCode);
+
+    console.log(countryInfoResponse);
+    renderCurrencyExchange(currencyCode);
+  });
+  //
+}
 
 function dropDownBtn(name) {
   var dropBtn = $("<button>");
@@ -219,7 +258,7 @@ $("#clearBtn").on("click", function(event) {
   localStorage.clear();
 });
 
-$("#searchBtn").on("click", function() {
+function goToNextPage(currency) {
   $("#dropdown-container").attr("style", "display:none");
 
   var scoresUrl =
@@ -228,10 +267,10 @@ $("#searchBtn").on("click", function() {
 
   var cityName = $("<h2>" + "Atlanta" + "</h2>");
   cityName.attr("class", "header");
-  cityName.attr("style","display:flex; justify-content:center")
+  cityName.attr("style", "display:flex; justify-content:center");
   var cardHorizontal = $("<div>");
   cardHorizontal.attr("class", "card horizontal");
-  cardHorizontal.attr("style","display:flex; flex-direction:row")
+  cardHorizontal.attr("style", "display:flex; flex-direction:row");
   var imgDiv = $("<div>");
   imgDiv.attr("class", "card-image");
   var img = $("<img>");
@@ -414,13 +453,12 @@ $("#searchBtn").on("click", function() {
     outdoorsDiv.append(outdoors);
     outdoorsDiv.append(outdoorsScoreDiv);
     $("#city-qualities").append(outdoorsDiv);
-
-    renderCurrencyExchange();
+    createElementsForCityPage(currency);
     cityFacts();
   });
 
   // creating the quality of life
-});
+}
 
 // function createCityCard (city){
 //   var cityName = $("<h2>" + city + "</h2>");
