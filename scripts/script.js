@@ -223,10 +223,10 @@ $("#searchBtn").on("click", function() {
   $("#dropdown-container").attr("style", "display:none");
 
   var scoresUrl =
-    "https://api.teleport.org/api/urban_areas/slug:atlanta/scores/";
-  var imgUrl = "https://api.teleport.org/api/urban_areas/slug:atlanta/images/";
+    "https://api.teleport.org/api/urban_areas/slug:beijing/scores/";
+  var imgUrl = "https://api.teleport.org/api/urban_areas/slug:beijing/images/";
 
-  var cityName = $("<h2>" + "Atlanta" + "</h2>");
+  var cityName = $("<h2>" + "beijing" + "</h2>");
   cityName.attr("class", "header");
   cityName.attr("style","display:flex; justify-content:center")
   var cardHorizontal = $("<div>");
@@ -264,21 +264,27 @@ $("#searchBtn").on("click", function() {
     cardHorizontal.append(cardSummary);
     // creating the quality of life
     var housing = $("<p>" + response.categories[0].name + "</p>");
+    housing.attr("style", "background-color:white;")
+    
+    
+
     var housingDiv = $("<div>");
     housingDiv.attr("class", "score-container");
 
     var housingScoreDiv = $("<div>");
     housingScoreDiv.attr("class", "stats");
+    
 
     var housingScore = response.categories[0].score_out_of_10;
     housingScore = Math.round(housingScore);
     housingScoreDiv.text(housingScore + "/10");
-    housingScoreDiv.attr(
-      "style",
-      "width:" + housingScore * 10 + "%; background-color:red"
-    );
+    housingScoreDiv.attr("style", "width:" + housingScore * 10 + "%; background-color:red");
+    //housingScoreDiv.attr("style", "padding-top: 0px", "padding-bottom: 0px;");
+    
 
     var costOfLiving = $("<p>" + response.categories[1].name + "</p>");
+    costOfLiving.attr("style", "background-color:white;");
+
     var costOfLivingDiv = $("<div>");
     costOfLivingDiv.attr("class", "score-container");
 
@@ -294,6 +300,7 @@ $("#searchBtn").on("click", function() {
     );
 
     var commute = $("<p>" + response.categories[5].name + "</p>");
+    commute.attr("style", "background-color:white;");
     var commuteDiv = $("<div>");
     commuteDiv.attr("class", "score-container");
 
@@ -309,6 +316,7 @@ $("#searchBtn").on("click", function() {
     );
 
     var safety = $("<p>" + response.categories[7].name + "</p>");
+    safety.attr("style", "background-color:white;");
     var safetyDiv = $("<div>");
     safetyDiv.attr("class", "score-container");
 
@@ -324,6 +332,7 @@ $("#searchBtn").on("click", function() {
     );
 
     var healthcare = $("<p>" + response.categories[8].name + "</p>");
+    healthcare.attr("style", "background-color:white;");
     var healthcareDiv = $("<div>");
     healthcareDiv.attr("class", "score-container");
 
@@ -339,6 +348,8 @@ $("#searchBtn").on("click", function() {
     );
 
     var education = $("<p>" + response.categories[9].name + "</p>");
+    education.attr("style", "background-color:white;");
+
     var educationDiv = $("<div>");
     educationDiv.attr("class", "score-container");
 
@@ -354,6 +365,7 @@ $("#searchBtn").on("click", function() {
     );
 
     var internetAccess = $("<p>" + response.categories[13].name + "</p>");
+    internetAccess.attr("style", "background-color:white;");
     var internetAccessDiv = $("<div>");
     internetAccessDiv.attr("class", "score-container");
 
@@ -369,6 +381,7 @@ $("#searchBtn").on("click", function() {
     );
 
     var outdoors = $("<p>" + response.categories[16].name + "</p>");
+    outdoors.attr("style", "background-color:white;");
     var outdoorsDiv = $("<div>");
     outdoorsDiv.attr("class", "score-container");
 
@@ -383,6 +396,7 @@ $("#searchBtn").on("click", function() {
       "width:" + outdoorsScore * 10 + "%; background-color:red"
     );
 
+    
     housingDiv.append(housing);
     housingDiv.append(housingScoreDiv);
     $("#city-qualities").append(housingDiv);
@@ -431,3 +445,5 @@ $("#searchBtn").on("click", function() {
 //   imgDiv.attr("class","card-image");
 //   var img = $("<img>");
 //   img.att
+
+
