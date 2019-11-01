@@ -23,7 +23,14 @@ function renderCurrencyExchange(currencyCode) {
 }
 
 function createElementsForCityPage(currency) {
-  var currencyEl = $("<p>" + "U.S. Dollar exhange rate:" + currency + "</p>");
+  var currencyEl = $(
+    "<p>" +
+      "U.S. Dollar exhange rate: " +
+      currency +
+      " " +
+      currencyCode +
+      "</p>"
+  );
   $("#currency-exchange").append(currencyEl);
 }
 
@@ -39,22 +46,25 @@ $.ajax({
 });
 
 // Ajax call to pull top 10 cities based on population by country Id
-var citySearchApi = {
-  async: true,
-  crossDomain: true,
-  url:
-    "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=us&sort=-population",
-  method: "GET",
-  headers: {
-    "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
-    "x-rapidapi-key": "6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1"
-  }
-};
-
-$.ajax(citySearchApi).done(function(response) {
-  console.log(response);
-});
-
+function getCityList(countryId) {
+  var citySearchApi = {
+    async: true,
+    crossDomain: true,
+    url:
+      "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=" +
+      countryId +
+      "&sort=-population",
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
+      "x-rapidapi-key": "6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1"
+    }
+  };
+  console.log("the city serach country id is it working", chosenCountryId);
+  $.ajax(citySearchApi).done(function(response) {
+    console.log("this is the big response hreeeeee", response);
+  });
+}
 var continentsObj = {
   AF: "Africa",
   AN: "Antarctica",
@@ -89,31 +99,6 @@ function RenderContinents() {
 RenderContinents();
 $("li").on("click", function(event) {
   console.log($(this).attr("data-GeoName"));
-  console.log(event);
-});
-// function RenderCities() {
-//   var cityArray = Object.values(citiesObj)
-//   console.log(contArray)
-//   var contKeys = Object.keys(citiesObj)
-//   console.log(contKeys)
-//   for (var continentCode in citiesObj) {
-//     console.log("code", continentCode)
-//     console.log("continent", citiesObj[continentCode])
-//     var contList = $('<ul>')
-//     $("#continent").append(contList);
-//     var cont = $("<li>" + citiesObj[continentCode] + "</li>").attr('data-contGeoName', continentCode)
-//     $("#continent").append(cont);
-//   }
-// }
-// RenderCities();
-// $("li").on("click", function (event) {
-//   console.log($(this).attr('data-GeoName'))
-//   console.log(event)
-// })
-
-RenderContinents();
-$("li").on("click", function(event) {
-  console.log(event.target.attr("data-geoname"));
   console.log(event);
 });
 
@@ -205,11 +190,30 @@ function getCountryInfo(chosenCountryLink) {
     console.log(currencyCode);
 
     console.log(countryInfoResponse);
+    getCityList(chosenCountryId);
     renderCurrencyExchange(currencyCode);
   });
   //
 }
-
+// function RenderCities() {
+//   var cityArray = Object.values(citiesObj)
+//   console.log(contArray)
+//   var contKeys = Object.keys(citiesObj)
+//   console.log(contKeys)
+//   for (var continentCode in citiesObj) {
+//     console.log("code", continentCode)
+//     console.log("continent", citiesObj[continentCode])
+//     var contList = $('<ul>')
+//     $("#continent").append(contList);
+//     var cont = $("<li>" + citiesObj[continentCode] + "</li>").attr('data-contGeoName', continentCode)
+//     $("#continent").append(cont);
+//   }
+// }
+// RenderCities();
+// $("li").on("click", function (event) {
+//   console.log($(this).attr('data-GeoName'))
+//   console.log(event)
+// })
 function dropDownBtn(name) {
   var dropBtn = $("<button>");
   dropBtn.attr("class", "btn btn-secondary dropdown-toggle");
@@ -265,7 +269,9 @@ function goToNextPage(currency) {
     "https://api.teleport.org/api/urban_areas/slug:beijing/scores/";
   var imgUrl = "https://api.teleport.org/api/urban_areas/slug:beijing/images/";
 
-  var cityName = $("<h2>" + "beijing" + "</h2>");
+  var cityName = $(
+    "<h2>" + "beijing...with a capital B! -Jocelyn 2019 " + "</h2>"
+  );
   cityName.attr("class", "header");
   cityName.attr("style", "display:flex; justify-content:center");
   var cardHorizontal = $("<div>");
