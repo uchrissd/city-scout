@@ -203,7 +203,7 @@ function renderCurrencyExchange(currencyCode) {
 }
 
 function createElementsForCityPage(currency) {
-  var currencyEl = $("<p>" + "U.S. Dollar exhange rate: " + currency + "</p>");
+  var currencyEl = $("<p style=font-size:25px;font-family:candara,arial,helvetica;>" + "U.S. Dollar exhange rate: " + currency + "</p>");
   $("#currency-exchange").append(currencyEl);
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>CITYFACTSCODE>>>>>>>>>>>>>>>>>>>>>>>>
@@ -229,7 +229,7 @@ function cityFacts() {
       var cityPopulation = cityFactsResponse["population"];
       console.log("this is the city facts: ", cityPopulation);
       var cityPopulationEl = $(
-        "<p>" + "Population: " + cityPopulation + "</p>"
+        "<p style=font-size:25px;font-family:candara,arial,helvetica;>" + "Population: " + cityPopulation + "</p>"
       );
       $("#population").append(cityPopulationEl);
     });
@@ -249,7 +249,7 @@ function goToNextPage(currency) {
     "https://api.teleport.org/api/urban_areas/slug:beijing/scores/";
   var imgUrl = "https://api.teleport.org/api/urban_areas/slug:beijing/images/";
 
-  var cityName = $("<h2>" + "beijing...with a capital B! -Jocelyn 2019 " + "</h2>");
+  var cityName = $("<h2>" + "Your city here. (currently hardcoded)" + "</h2>");
   cityName.attr("class", "header");
   cityName.attr("style", "display:flex; justify-content:center");
   var cardHorizontal = $("<div>");
@@ -415,6 +415,8 @@ function goToNextPage(currency) {
       "width:" + outdoorsScore * 10 + "%; background-color:red"
     );
 
+    $("#city-qualities").append("The following quality of life data is aggragated by " + "<a href='https://developers.teleport.org/api/'>" + "Teleport" + "</a>" + "™:");
+    $("#city-qualities").append("<hr>" + "</hr>");
 
     housingDiv.append(housing);
     housingDiv.append(housingScoreDiv);
