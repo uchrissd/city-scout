@@ -23,7 +23,7 @@ function renderCurrencyExchange(currencyCode) {
 }
 
 function createElementsForCityPage(currency) {
-  var currencyEl = $("<p>" + "U.S. Dollar exhange rate:" + currency + "</p>");
+  var currencyEl = $("<p>" + "U.S. Dollar exhange rate: " + currency + "</p>");
   $("#currency-exchange").append(currencyEl);
 }
 
