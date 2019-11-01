@@ -23,7 +23,7 @@ function renderCurrencyExchange(currencyCode) {
 }
 
 function createElementsForCityPage(currency) {
-  var currencyEl = $("<p>" + "U.S. Dollar exhange rate:" + currency + "</p>");
+  var currencyEl = $("<p>" + "U.S. Dollar exhange rate: " + currency + "</p>");
   $("#currency-exchange").append(currencyEl);
 }
 
@@ -265,7 +265,7 @@ function goToNextPage(currency) {
     "https://api.teleport.org/api/urban_areas/slug:beijing/scores/";
   var imgUrl = "https://api.teleport.org/api/urban_areas/slug:beijing/images/";
 
-  var cityName = $("<h2>" + "beijing" + "</h2>");
+  var cityName = $("<h2>" + "beijing...with a capital B! -Jocelyn 2019 " + "</h2>");
   cityName.attr("class", "header");
   cityName.attr("style", "display:flex; justify-content:center");
   var cardHorizontal = $("<div>");
