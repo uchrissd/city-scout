@@ -14,7 +14,7 @@ function renderCurrencyExchange(currencyCode) {
   $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     console.log(response);
     var currency = response.rates[currencyCode];
     console.log("this is the currency", currency);
@@ -34,27 +34,28 @@ var continentQueryURL = "https://api.teleport.org/api/continents/";
 $.ajax({
   url: continentQueryURL,
   method: "GET"
-}).then(function(response) {
+}).then(function (response) {
   console.log(response);
 });
 
 // Ajax call to pull top 10 cities based on population by country Id
-var citySearchApi = {
-  async: true,
-  crossDomain: true,
-  url:
-    "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=us&sort=-population",
-  method: "GET",
-  headers: {
-    "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
-    "x-rapidapi-key": "6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1"
-  }
-};
-
-$.ajax(citySearchApi).done(function(response) {
-  console.log(response);
-});
-
+function getCityList(countryId) {
+  var citySearchApi = {
+    async: true,
+    crossDomain: true,
+    url:
+      "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=" + countryId + "&sort=-population",
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
+      "x-rapidapi-key": "6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1"
+    }
+  };
+  console.log("the city serach country id is it working", chosenCountryId)
+  $.ajax(citySearchApi).done(function (response) {
+    console.log("this is the big response hreeeeee", response);
+  });
+}
 var continentsObj = {
   AF: "Africa",
   AN: "Antarctica",
@@ -87,41 +88,17 @@ function RenderContinents() {
   $("#continent").append(contList);
 }
 RenderContinents();
-$("li").on("click", function(event) {
+$("li").on("click", function (event) {
   console.log($(this).attr("data-GeoName"));
   console.log(event);
 });
-// function RenderCities() {
-//   var cityArray = Object.values(citiesObj)
-//   console.log(contArray)
-//   var contKeys = Object.keys(citiesObj)
-//   console.log(contKeys)
-//   for (var continentCode in citiesObj) {
-//     console.log("code", continentCode)
-//     console.log("continent", citiesObj[continentCode])
-//     var contList = $('<ul>')
-//     $("#continent").append(contList);
-//     var cont = $("<li>" + citiesObj[continentCode] + "</li>").attr('data-contGeoName', continentCode)
-//     $("#continent").append(cont);
-//   }
-// }
-// RenderCities();
-// $("li").on("click", function (event) {
-//   console.log($(this).attr('data-GeoName'))
-//   console.log(event)
-// })
 
-RenderContinents();
-$("li").on("click", function(event) {
-  console.log(event.target.attr("data-geoname"));
-  console.log(event);
-});
 
 //JQuery get variables
 var startContainer = $("#start-container");
 var dropDownContainer = $("#dropdown-container");
 
-$(".start-btn").on("click", function() {
+$(".start-btn").on("click", function () {
   startContainer.attr("style", "display:none");
   dropDownContainer.attr("style", "display:block");
 });
@@ -135,7 +112,7 @@ $("#instructions").append(contInstructions);
 
 var continentChosen;
 
-$(".continent-drop").on("click", function() {
+$(".continent-drop").on("click", function () {
   continentChosen = $(this).attr("data-contgeoname");
   console.log(continentChosen);
 
@@ -147,7 +124,7 @@ $(".continent-drop").on("click", function() {
   $.ajax({
     url: countryUrl,
     method: "GET"
-  }).then(function(countries) {
+  }).then(function (countries) {
     console.log(countries);
     continentObject = countries;
     console.log(countries._links["country:items"][1]);
@@ -170,7 +147,7 @@ $(".continent-drop").on("click", function() {
     $("#country").append(countryList);
 
     //Click event to grab text value when country button is clicked
-    $(".country-drop").on("click", function() {
+    $(".country-drop").on("click", function () {
       chosenCountry = $(this).text();
       console.log(chosenCountry);
       console.log(continentObject);
@@ -184,6 +161,7 @@ $(".continent-drop").on("click", function() {
       }
       console.log("LOOK HERE: " + chosenCountryLink);
       getCountryInfo(chosenCountryLink);
+
     });
   });
   $("#instruc-1").attr("style", "display:none");
@@ -198,18 +176,37 @@ function getCountryInfo(chosenCountryLink) {
   $.ajax({
     url: chosenCountryLink,
     method: "GET"
-  }).then(function(countryInfoResponse) {
+  }).then(function (countryInfoResponse) {
     chosenCountryId = countryInfoResponse.iso_alpha2;
     currencyCode = countryInfoResponse.currency_code;
     console.log(chosenCountryId);
     console.log(currencyCode);
 
     console.log(countryInfoResponse);
+    getCityList(chosenCountryId);
     renderCurrencyExchange(currencyCode);
   });
   //
 }
-
+// function RenderCities() {
+//   var cityArray = Object.values(citiesObj)
+//   console.log(contArray)
+//   var contKeys = Object.keys(citiesObj)
+//   console.log(contKeys)
+//   for (var continentCode in citiesObj) {
+//     console.log("code", continentCode)
+//     console.log("continent", citiesObj[continentCode])
+//     var contList = $('<ul>')
+//     $("#continent").append(contList);
+//     var cont = $("<li>" + citiesObj[continentCode] + "</li>").attr('data-contGeoName', continentCode)
+//     $("#continent").append(cont);
+//   }
+// }
+// RenderCities();
+// $("li").on("click", function (event) {
+//   console.log($(this).attr('data-GeoName'))
+//   console.log(event)
+// })
 function dropDownBtn(name) {
   var dropBtn = $("<button>");
   dropBtn.attr("class", "btn btn-secondary dropdown-toggle");
@@ -231,7 +228,7 @@ function cityFacts() {
   $.ajax({
     url: citySearch,
     method: "GET"
-  }).then(function(cityResponse) {
+  }).then(function (cityResponse) {
     var cityGeoId =
       cityResponse._embedded["city:search-results"][0]._links["city:item"].href;
     console.log("this is the city id link: ", cityGeoId);
@@ -241,7 +238,7 @@ function cityFacts() {
     $.ajax({
       url: cityFactsURL,
       method: "GET"
-    }).then(function(cityFactsResponse) {
+    }).then(function (cityFactsResponse) {
       var cityPopulation = cityFactsResponse["population"];
       console.log("this is the city facts: ", cityPopulation);
       var cityPopulationEl = $(
@@ -253,7 +250,7 @@ function cityFacts() {
 }
 
 //clears search history from local storage
-$("#clearBtn").on("click", function(event) {
+$("#clearBtn").on("click", function (event) {
   console.log(localStorage);
   localStorage.clear();
 });
@@ -278,7 +275,7 @@ function goToNextPage(currency) {
   $.ajax({
     url: imgUrl,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     console.log(response);
     img.attr("src", response.photos[0].image.web);
     imgDiv.append(img);
@@ -296,7 +293,7 @@ function goToNextPage(currency) {
   $.ajax({
     url: scoresUrl,
     method: "GET"
-  }).then(function(response) {
+  }).then(function (response) {
     console.log(response);
     cardContent.append(response.summary);
     cardSummary.append(cardContent);
@@ -304,22 +301,22 @@ function goToNextPage(currency) {
     // creating the quality of life
     var housing = $("<p>" + "<strong>" + response.categories[0].name + "</strong>" + "</p>");
     housing.attr("style", "background-color:white;")
-    
-    
+
+
 
     var housingDiv = $("<div>");
     housingDiv.attr("class", "score-container");
 
     var housingScoreDiv = $("<div>");
     housingScoreDiv.attr("class", "stats");
-    
+
 
     var housingScore = response.categories[0].score_out_of_10;
     housingScore = Math.round(housingScore);
     housingScoreDiv.text(housingScore + "/10");
     housingScoreDiv.attr("style", "width:" + housingScore * 10 + "%; background-color:red");
     //housingScoreDiv.attr("style", "padding-top: 0px", "padding-bottom: 0px;");
-    
+
 
     var costOfLiving = $("<p>" + "<strong>" + response.categories[1].name + "</strong>" +"</p>");
     costOfLiving.attr("style", "background-color:white;");
@@ -435,7 +432,7 @@ function goToNextPage(currency) {
       "width:" + outdoorsScore * 10 + "%; background-color:red"
     );
 
-    
+
     housingDiv.append(housing);
     housingDiv.append(housingScoreDiv);
     $("#city-qualities").append(housingDiv);
