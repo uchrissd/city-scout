@@ -4,38 +4,6 @@ var chosenCountry;
 var chosenCountryLink;
 var chosenCountryId;
 var currencyCode;
-<<<<<<< HEAD
-//API call for currency exchange
-var apiKEY = "9434dac94bff4079b3e8ae867f65cdda";
-console.log(apiKEY);
-var queryURL = "https://openexchangerates.org/api/latest.json?app_id=" + apiKEY;
-console.log(queryURL);
-//Function renders the currency change using the U.S. dollar as the base and appends to last page
-function renderCurrencyExchange(currencyCode) {
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response) {
-    console.log(response);
-    var currency = response.rates[currencyCode];
-    console.log("this is the currency", currency);
-    goToNextPage(currency);
-  });
-}
-
-function createElementsForCityPage(currency) {
-  var currencyEl = $(
-    "<p>" +
-      "U.S. Dollar exhange rate: " +
-      currency +
-      " " +
-      currencyCode +
-      "</p>"
-  );
-  $("#currency-exchange").append(currencyEl);
-}
-=======
->>>>>>> 17ad55c05868fd9b3d9ded68c83637474995eaee
 
 //>>>>>>>>>>>>>>>>>>>>>>API call for continents>>>>>>>>>>>>>>>>
 var teleportAPIkey = "";
@@ -102,7 +70,7 @@ $(".continent-drop").on("click", function() {
     method: "GET"
   })
     //>>>>>>>>>>>>>>>>>>>>>>>RENDERCOUNTRIESCODE>>>>>>>>>>>>>>>>>>>
-    .then(function (countries) {
+    .then(function(countries) {
       console.log(countries);
       continentObject = countries;
       console.log(countries._links["country:items"][1]);
@@ -125,7 +93,7 @@ $(".continent-drop").on("click", function() {
       $("#country").append(countryList);
 
       //>>>>>>>>>>>>>>>>>COUNTRY ONCLICK EVENT>>>>>>>>>>>>>>>>>>>>
-      $(".country-drop").on("click", function () {
+      $(".country-drop").on("click", function() {
         chosenCountry = $(this).text();
         console.log(chosenCountry);
         console.log(continentObject);
@@ -139,7 +107,6 @@ $(".continent-drop").on("click", function() {
         }
         console.log("LOOK HERE: " + chosenCountryLink);
         getCountryInfo(chosenCountryLink);
-
       });
     });
   $("#instruc-1").attr("style", "display:none");
@@ -173,15 +140,17 @@ function getCityList(countryId) {
     async: true,
     crossDomain: true,
     url:
-      "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=" + countryId + "&sort=-population",
+      "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=" +
+      countryId +
+      "&sort=-population",
     method: "GET",
     headers: {
       "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
       "x-rapidapi-key": "6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1"
     }
   };
-  console.log("the city serach country id is it working", chosenCountryId)
-  $.ajax(citySearchApi).done(function (response) {
+  console.log("the city serach country id is it working", chosenCountryId);
+  $.ajax(citySearchApi).done(function(response) {
     console.log("this is the big response hreeeeee", response);
   });
 }
@@ -191,7 +160,7 @@ function getCityList(countryId) {
 var startContainer = $("#start-container");
 var dropDownContainer = $("#dropdown-container");
 
-$(".start-btn").on("click", function () {
+$(".start-btn").on("click", function() {
   startContainer.attr("style", "display:none");
   dropDownContainer.attr("style", "display:block");
 });
@@ -214,7 +183,6 @@ function dropDownBtn(name) {
   return dropBtn;
 }
 
-
 //>>>>>>>>>>>>>>>>>>>CURRENCY EXCHANGE CODE>>>>>>>>>>>>>>>>>>
 //API call for currency exchange
 var apiKEY = "9434dac94bff4079b3e8ae867f65cdda";
@@ -226,7 +194,7 @@ function renderCurrencyExchange(currencyCode) {
   $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function (response) {
+  }).then(function(response) {
     console.log(response);
     var currency = response.rates[currencyCode];
     console.log("this is the currency", currency);
@@ -321,7 +289,7 @@ function goToNextPage(currency) {
     cardHorizontal.append(cardSummary);
     // creating the quality of life
     var housing = $("<p>" + response.categories[0].name + "</p>");
-    housing.attr("style", "background-color:white;")
+    housing.attr("style", "background-color:white;");
 
     var housingDiv = $("<div>");
     housingDiv.attr("class", "score-container");
@@ -332,7 +300,10 @@ function goToNextPage(currency) {
     var housingScore = response.categories[0].score_out_of_10;
     housingScore = Math.round(housingScore);
     housingScoreDiv.text(housingScore + "/10");
-    housingScoreDiv.attr("style", "width:" + housingScore * 10 + "%; background-color:red");
+    housingScoreDiv.attr(
+      "style",
+      "width:" + housingScore * 10 + "%; background-color:red"
+    );
 
     var costOfLiving = $("<p>" + response.categories[1].name + "</p>");
     costOfLiving.attr("style", "background-color:white;");
@@ -483,4 +454,3 @@ function goToNextPage(currency) {
     cityFacts();
   });
 }
-
