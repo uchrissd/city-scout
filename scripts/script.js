@@ -265,7 +265,7 @@ function goToNextPage(currency) {
     "https://api.teleport.org/api/urban_areas/slug:beijing/scores/";
   var imgUrl = "https://api.teleport.org/api/urban_areas/slug:beijing/images/";
 
-  var cityName = $("<h2>" + "beijing" + "</h2>");
+  var cityName = $("<h2>" + "Beijing" + "</h2>");
   cityName.attr("class", "header");
   cityName.attr("style", "display:flex; justify-content:center");
   var cardHorizontal = $("<div>");
@@ -302,7 +302,7 @@ function goToNextPage(currency) {
     cardSummary.append(cardContent);
     cardHorizontal.append(cardSummary);
     // creating the quality of life
-    var housing = $("<p>" + response.categories[0].name + "</p>");
+    var housing = $("<p>" + "<strong>" + response.categories[0].name + "</strong>" + "</p>");
     housing.attr("style", "background-color:white;")
     
     
@@ -321,7 +321,7 @@ function goToNextPage(currency) {
     //housingScoreDiv.attr("style", "padding-top: 0px", "padding-bottom: 0px;");
     
 
-    var costOfLiving = $("<p>" + response.categories[1].name + "</p>");
+    var costOfLiving = $("<p>" + "<strong>" + response.categories[1].name + "</strong>" +"</p>");
     costOfLiving.attr("style", "background-color:white;");
 
     var costOfLivingDiv = $("<div>");
@@ -338,7 +338,7 @@ function goToNextPage(currency) {
       "width:" + costOfLivingScore * 10 + "%; background-color:red"
     );
 
-    var commute = $("<p>" + response.categories[5].name + "</p>");
+    var commute = $("<p>" + "<strong>" + response.categories[5].name + "</strong>" + "</p>");
     commute.attr("style", "background-color:white;");
     var commuteDiv = $("<div>");
     commuteDiv.attr("class", "score-container");
@@ -354,7 +354,7 @@ function goToNextPage(currency) {
       "width:" + commuteScore * 10 + "%; background-color:red"
     );
 
-    var safety = $("<p>" + response.categories[7].name + "</p>");
+    var safety = $("<p>" + "<strong>" + response.categories[7].name + "</strong>"+ "</p>");
     safety.attr("style", "background-color:white;");
     var safetyDiv = $("<div>");
     safetyDiv.attr("class", "score-container");
@@ -370,7 +370,7 @@ function goToNextPage(currency) {
       "width:" + safetyScore * 10 + "%; background-color:red"
     );
 
-    var healthcare = $("<p>" + response.categories[8].name + "</p>");
+    var healthcare = $("<p>" + "<strong>" + response.categories[8].name + "</strong>" + "</p>");
     healthcare.attr("style", "background-color:white;");
     var healthcareDiv = $("<div>");
     healthcareDiv.attr("class", "score-container");
@@ -386,7 +386,7 @@ function goToNextPage(currency) {
       "width:" + healthcareScore * 10 + "%; background-color:red"
     );
 
-    var education = $("<p>" + response.categories[9].name + "</p>");
+    var education = $("<p>" + "<strong>" + response.categories[9].name + "</strong>" +"</p>");
     education.attr("style", "background-color:white;");
 
     var educationDiv = $("<div>");
@@ -403,7 +403,7 @@ function goToNextPage(currency) {
       "width:" + educationScore * 10 + "%; background-color:red"
     );
 
-    var internetAccess = $("<p>" + response.categories[13].name + "</p>");
+    var internetAccess = $("<p>" + "<strong>" + response.categories[13].name + "</strong>" + "</p>");
     internetAccess.attr("style", "background-color:white;");
     var internetAccessDiv = $("<div>");
     internetAccessDiv.attr("class", "score-container");
@@ -419,7 +419,7 @@ function goToNextPage(currency) {
       "width:" + internetAccessScore * 10 + "%; background-color:red"
     );
 
-    var outdoors = $("<p>" + response.categories[16].name + "</p>");
+    var outdoors = $("<p>" + "<strong>" + response.categories[16].name + "<strong>" + "</p>");
     outdoors.attr("style", "background-color:white;");
     var outdoorsDiv = $("<div>");
     outdoorsDiv.attr("class", "score-container");
