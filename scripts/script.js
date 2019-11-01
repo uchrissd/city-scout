@@ -194,6 +194,7 @@ $(".continent-drop").on("click", function() {
   });
 
   $("#dropdown-container").on("click", ".city-drop", function() {
+    $("#clearBtn").attr("style", "display:none");
     cityChosen = $(this).attr("data-name");
     console.log(cityChosen);
     renderCurrencyExchange(currencyCode);
@@ -231,7 +232,7 @@ function dropDownBtn(name) {
   dropBtn.attr("data-toggle", "dropdown");
   dropBtn.attr("aria-haspopup", "true");
   dropBtn.attr("aria-expanded", "false");
-  dropBtn.attr("style", "margin: 14px 0; padding: 0 10.5px");
+  dropBtn.attr("style", "margin: 14px 0; padding: 0 60px");
   dropBtn.text(name);
   return dropBtn;
 }
@@ -259,7 +260,10 @@ function cityFacts() {
       var cityPopulation = cityFactsResponse["population"];
       console.log("this is the city facts: ", cityPopulation);
       var cityPopulationEl = $(
-        "<p>" + "Population: " + cityPopulation + "</p>"
+        "<p style=font-size:25px;font-family:candara,arial,helvetica;>" +
+          "Population: " +
+          cityPopulation +
+          "</p>"
       );
       $("#population").append(cityPopulationEl);
     });
@@ -466,6 +470,15 @@ function goToNextPage(cityChosen) {
       "style",
       "width:" + outdoorsScore * 10 + "%; background-color:red"
     );
+
+    $("#city-qualities").append(
+      "The following quality of life data is aggragated by " +
+        "<a href='https://developers.teleport.org/api/'>" +
+        "Teleport" +
+        "</a>" +
+        "™:"
+    );
+    $("#city-qualities").append("<hr>" + "</hr>");
 
     housingDiv.append(housing);
     housingDiv.append(housingScoreDiv);
