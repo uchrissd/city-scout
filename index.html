@@ -77,21 +77,31 @@
             </p>
           </div>
           <div class="card-action">
-            <a class="waves-effect waves-light btn-large start-btn">Get Started</a>
+            <a class="waves-effect waves-light btn-large start-btn" style="font-family:candara,arial,helvetica;">Get Started</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="dropdown-container" style="display:none">
-    <div class="row" id="instructions"></div>
-    <div class="row">
-      <div class="col s4 input-field dropdown" id="continent">
-        <button class="btn btn-secondary dropdown-toggle" style="padding: 0 60px;" type="button" id="dropdownMenuButton"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Continents
-        </button>
+    <div id="dropdown-container" style="display:none">
+      <div class="row" id="instructions"></div>
+      <div class="row">
+        <div class="col s4 input-field dropdown" id="continent">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            style="padding: 0 60px"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Continents
+          </button>
+        </div>
+        <div class="col s4 dropdown" id="country"></div>
+        <div class="col s4 dropdown" id="city"></div>
       </div>
       <div class="col s4 dropdown" id="country"></div>
       <div class="col s4" id="city"></div>
