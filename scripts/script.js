@@ -6,20 +6,18 @@ var chosenCountryId;
 var currencyCode;
 var cityChosen;
 var currency;
+
 //API call for currency exchange
 var apiKEY = "9434dac94bff4079b3e8ae867f65cdda";
-console.log(apiKEY);
+
 var queryURL = "https://openexchangerates.org/api/latest.json?app_id=" + apiKEY;
-console.log(queryURL);
 //Function renders the currency change using the U.S. dollar as the base and appends to last page
 function renderCurrencyExchange(currencyCode) {
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
     currency = response.rates[currencyCode];
-    console.log("this is the currency", currency);
     goToNextPage(cityChosen);
   });
 }
@@ -42,7 +40,6 @@ $.ajax({
   url: continentQueryURL,
   method: "GET"
 }).then(function(response) {
-  console.log(response);
 });
 
 // Ajax call to pull top 10 cities based on population by country Id
@@ -60,23 +57,19 @@ function getCityList(countryId) {
       "x-rapidapi-key": "6fa73b7e3dmsh2c5c461c7d26929p191785jsne3190cf9f4b1"
     }
   };
-  console.log("the city serach country id is it working", chosenCountryId);
   $.ajax(citySearchApi).done(function(response) {
-    console.log("this is the big response hreeeeee", response);
     var cityList = $("<div>");
     cityList.attr("aria-labelledby", "dropdownMenuButton");
     cityList.attr("class", "dropdown-menu");
     cityList.attr("id", "dropdown-menu-countries");
     for (var i = 0; i < response.data.length; i++) {
-      console.log(i);
       var city = $("<a href='#'>" + response.data[i].city + "</a>");
       city.attr("class", "dropdown-item city-drop");
       city.attr("data-name", response.data[i].city);
-      console.log(city);
       cityList.append(city);
     }
-    var Cities = "Cities";
-    var cityBtn = dropDownBtn(Cities);
+    var cities = "Cities";
+    var cityBtn = dropDownBtn(cities);
     $("#city").append(cityBtn);
     $("#city").append(cityList);
   });
@@ -91,20 +84,14 @@ var continentsObj = {
   SA: "South America"
 };
 
-console.log(Object.keys(continentsObj));
-
-function RenderContinents() {
+function renderContinents() {
   var contArray = Object.values(continentsObj);
-  console.log(contArray);
   var contKeys = Object.keys(continentsObj);
-  console.log(contKeys);
   var contList = $("<div>");
   contList.attr("aria-labelledby", "dropdownMenuButton");
   contList.attr("class", "dropdown-menu");
 
   for (var continentCode in continentsObj) {
-    console.log("code", continentCode);
-    console.log("continent", continentsObj[continentCode]);
     var cont = $("<a href='#'>" + continentsObj[continentCode] + "</a>");
     cont.attr("class", "dropdown-item continent-drop");
     cont.attr("data-contGeoName", continentCode);
@@ -112,11 +99,9 @@ function RenderContinents() {
   }
   $("#continent").append(contList);
 }
-RenderContinents();
-$("li").on("click", function(event) {
-  console.log($(this).attr("data-GeoName"));
-  console.log(event);
-});
+
+//renders the continent drop down list
+renderContinents();
 
 //JQuery get variables
 var startContainer = $("#start-container");
@@ -133,12 +118,10 @@ contInstructions.attr("style", "display:block");
 $("#continent").prepend(contInstructions);
 
 // saving continent user selected
-
 var continentChosen;
 
 $(".continent-drop").on("click", function() {
   continentChosen = $(this).attr("data-contgeoname");
-  console.log(continentChosen);
 
   var countryUrl =
     "https://api.teleport.org/api/continents/geonames:" +
@@ -149,20 +132,16 @@ $(".continent-drop").on("click", function() {
     url: countryUrl,
     method: "GET"
   }).then(function(countries) {
-    console.log(countries);
     continentObject = countries;
-    console.log(countries._links["country:items"][1]);
     var countryList = $("<div>");
     countryList.attr("aria-labelledby", "dropdownMenuButton");
     countryList.attr("class", "dropdown-menu");
     countryList.attr("id", "dropdown-menu-countries");
     for (var i = 0; i < countries.count; i++) {
-      console.log(i);
       var country = $(
         "<a href='#'>" + countries._links["country:items"][i].name + "</a>"
       );
       country.attr("class", "dropdown-item country-drop");
-      console.log(country);
       countryList.append(country);
     }
     var Countries = "Countries";
@@ -173,18 +152,13 @@ $(".continent-drop").on("click", function() {
     //Click event to grab text value when country button is clicked
     $(".country-drop").on("click", function() {
       chosenCountry = $(this).text();
-      console.log(chosenCountry);
-      console.log(continentObject);
       var countriesArray = continentObject._links["country:items"];
-      console.log(countriesArray);
       for (var i = 0; i < countriesArray.length; i++) {
         if (countriesArray[i].name === chosenCountry) {
           chosenCountryLink = countriesArray[i].href;
-          console.log("country link", chosenCountryLink);
         }
       }
 
-      console.log("LOOK HERE: " + chosenCountryLink);
       getCountryInfo(chosenCountryLink);
 
       //instructions when a country is chose
@@ -201,7 +175,6 @@ $(".continent-drop").on("click", function() {
   $("#dropdown-container").on("click", ".city-drop", function() {
     $("#clearBtn").attr("style", "display:none");
     cityChosen = $(this).attr("data-name");
-    console.log(cityChosen);
     renderCurrencyExchange(currencyCode);
   });
 
@@ -222,10 +195,6 @@ function getCountryInfo(chosenCountryLink) {
   }).then(function(countryInfoResponse) {
     chosenCountryId = countryInfoResponse.iso_alpha2;
     currencyCode = countryInfoResponse.currency_code;
-    console.log("this is the chosenCountryID", chosenCountryId);
-    console.log(currencyCode);
-
-    console.log(countryInfoResponse);
     getCityList(chosenCountryId);
   });
 }
@@ -244,7 +213,6 @@ function dropDownBtn(name) {
 }
 
 //Function for city-facts
-
 function cityFacts() {
   cityChosen = cityChosen.toLowerCase();
   var citySearch = "https://api.teleport.org/api/cities/?search=" + cityChosen;
@@ -255,7 +223,6 @@ function cityFacts() {
   }).then(function(cityResponse) {
     var cityGeoId =
       cityResponse._embedded["city:search-results"][0]._links["city:item"].href;
-    console.log("this is the city id link: ", cityGeoId);
 
     var cityFactsURL = cityGeoId;
 
@@ -264,7 +231,6 @@ function cityFacts() {
       method: "GET"
     }).then(function(cityFactsResponse) {
       var cityPopulation = cityFactsResponse["population"];
-      console.log("this is the city facts: ", cityPopulation);
       var cityPopulationEl = $(
         "<p style=font-size:25px;font-family:candara,arial,helvetica;>" +
           "Population: " +
@@ -275,12 +241,6 @@ function cityFacts() {
     });
   });
 }
-
-//clears search history from local storage
-$("#clearBtn").on("click", function(event) {
-  console.log(localStorage);
-  localStorage.clear();
-});
 
 function goToNextPage(cityChosen) {
   $("#dropdown-container").attr("style", "display:none");
@@ -309,7 +269,7 @@ function goToNextPage(cityChosen) {
     url: imgUrl,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
+
     img.attr("src", response.photos[0].image.web);
     imgDiv.append(img);
     cardHorizontal.append(imgDiv);
@@ -327,13 +287,13 @@ function goToNextPage(cityChosen) {
     url: scoresUrl,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
     cardContent.append(response.summary);
     cardSummary.append(cardContent);
     cardHorizontal.append(cardSummary);
-    // creating the quality of life
+
+    // creating the quality of life stats bars
     var housing = $(
-      "<p>" + "<strong>" + response.categories[0].name + "</strong>" + "</p>"
+      "<p>" + response.categories[0].name + "</p>"
     );
     housing.attr("style", "background-color:white;");
 
@@ -350,10 +310,9 @@ function goToNextPage(cityChosen) {
       "style",
       "width:" + housingScore * 10 + "%; background-color:red"
     );
-    //housingScoreDiv.attr("style", "padding-top: 0px", "padding-bottom: 0px;");
 
     var costOfLiving = $(
-      "<p>" + "<strong>" + response.categories[1].name + "</strong>" + "</p>"
+      "<p>" + response.categories[1].name + "</p>"
     );
     costOfLiving.attr("style", "background-color:white;");
 
@@ -372,7 +331,7 @@ function goToNextPage(cityChosen) {
     );
 
     var commute = $(
-      "<p>" + "<strong>" + response.categories[5].name + "</strong>" + "</p>"
+      "<p>" + response.categories[5].name + "</p>"
     );
     commute.attr("style", "background-color:white;");
     var commuteDiv = $("<div>");
@@ -390,7 +349,7 @@ function goToNextPage(cityChosen) {
     );
 
     var safety = $(
-      "<p>" + "<strong>" + response.categories[7].name + "</strong>" + "</p>"
+      "<p>" + response.categories[7].name + "</p>"
     );
     safety.attr("style", "background-color:white;");
     var safetyDiv = $("<div>");
@@ -408,7 +367,7 @@ function goToNextPage(cityChosen) {
     );
 
     var healthcare = $(
-      "<p>" + "<strong>" + response.categories[8].name + "</strong>" + "</p>"
+      "<p>" + response.categories[8].name + "</p>"
     );
     healthcare.attr("style", "background-color:white;");
     var healthcareDiv = $("<div>");
@@ -426,7 +385,7 @@ function goToNextPage(cityChosen) {
     );
 
     var education = $(
-      "<p>" + "<strong>" + response.categories[9].name + "</strong>" + "</p>"
+      "<p>" + response.categories[9].name + "</p>"
     );
     education.attr("style", "background-color:white;");
 
@@ -445,7 +404,7 @@ function goToNextPage(cityChosen) {
     );
 
     var internetAccess = $(
-      "<p>" + "<strong>" + response.categories[13].name + "</strong>" + "</p>"
+      "<p>" + response.categories[13].name + "</p>"
     );
     internetAccess.attr("style", "background-color:white;");
     var internetAccessDiv = $("<div>");
@@ -463,7 +422,7 @@ function goToNextPage(cityChosen) {
     );
 
     var outdoors = $(
-      "<p>" + "<strong>" + response.categories[16].name + "<strong>" + "</p>"
+      "<p>" + response.categories[16].name + "</p>"
     );
     outdoors.attr("style", "background-color:white;");
     var outdoorsDiv = $("<div>");
@@ -529,24 +488,12 @@ function goToNextPage(cityChosen) {
     startNewSearch.text("Start New Search");
     $("#nav-btn").append(startNewSearch);
 
+    //reloads to beginning page
     $("#newSearch").click(function() {
-      console.log("shouldnt be hereeeee 3");
       location.reload(true);
     });
 
     createElementsForCityPage(currency);
     cityFacts();
   });
-
-  // creating the quality of life
 }
-
-// function createCityCard (city){
-//   var cityName = $("<h2>" + city + "</h2>");
-//   cityName.attr("class","header");
-//   var cardHorizontal = $("<div>");
-//   cardHorizontal.attr("class","card horizontal");
-//   var imgDiv = $("<div>");
-//   imgDiv.attr("class","card-image");
-//   var img = $("<img>");
-//   img.att
