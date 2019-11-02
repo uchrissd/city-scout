@@ -20,7 +20,7 @@ The application is written in JavaScript and uses the jQuery library for travers
 **Screenshots**
 
 ![Homepage Screenshot](assets/homepage-screenshot.jpg)
-![Homepage Screenshot](assets\city-facts-screenshot.jpg)
+![City facts page Screenshot](assets/city-facts-screenshot.jpg)
 
 **Code Example**
 
