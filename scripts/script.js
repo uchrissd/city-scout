@@ -71,7 +71,7 @@ function getCityList(countryId) {
       console.log(i);
       var city = $("<a href='#'>" + response.data[i].city + "</a>");
       city.attr("class", "dropdown-item city-drop");
-      city.attr("data-name", response.data[i].city)
+      city.attr("data-name", response.data[i].city);
       console.log(city);
       cityList.append(city);
     }
@@ -194,21 +194,20 @@ $(".continent-drop").on("click", function() {
       var cityInstructions = $("<h3>" + "Choose a city: " + "</h3>");
       cityInstructions.attr("id", "instruc-3");
       cityInstructions.attr("style", "display:block");
-<<<<<<< HEAD
-      $("#instructions").append(cityInstructions);
+      $("#city").append(cityInstructions);
     });
   });
 
-  $("#dropdown-container").on("click", ".city-drop", function () {
-    $("#clearBtn").attr("style", "display:none")
+  $("#dropdown-container").on("click", ".city-drop", function() {
+    $("#clearBtn").attr("style", "display:none");
     cityChosen = $(this).attr("data-name");
     console.log(cityChosen);
     renderCurrencyExchange(currencyCode);
-  })
->>>>>>> 6d3366ccef3fdbe771d74502c5a5c806701e1e23
+  });
 
   // instructions when a continent is chosen
   $("#instruc-1").attr("style", "display:none");
+  $("#dropdownMenuButton").attr("style", "display:none");
   var countryInstructions = $("<h3>" + "Choose a country: " + "</h3>");
   countryInstructions.attr("id", "instruc-2");
   countryInstructions.attr("style", "display:block");
@@ -290,11 +289,15 @@ function goToNextPage(cityChosen) {
 
   var scoresUrl =
     "https://api.teleport.org/api/urban_areas/slug:" + cityChosen + "/scores/";
-  var imgUrl = "https://api.teleport.org/api/urban_areas/slug:" + cityChosen + "/images/";
+  var imgUrl =
+    "https://api.teleport.org/api/urban_areas/slug:" + cityChosen + "/images/";
 
   var cityName = $("<h2>" + cityChosen + "</h2>");
   cityName.attr("class", "header");
-  cityName.attr("style", "display:flex; justify-content:center; background-color:cyan;");
+  cityName.attr(
+    "style",
+    "display:flex; justify-content:center; background-color:cyan;"
+  );
   var cardHorizontal = $("<div>");
   cardHorizontal.attr("class", "card horizontal");
   cardHorizontal.attr("style", "display:flex; flex-direction:row");
@@ -349,8 +352,9 @@ function goToNextPage(cityChosen) {
     );
     //housingScoreDiv.attr("style", "padding-top: 0px", "padding-bottom: 0px;");
 
-
-    var costOfLiving = $("<p>" + "<strong>" + response.categories[1].name + "</strong>" + "</p>");
+    var costOfLiving = $(
+      "<p>" + "<strong>" + response.categories[1].name + "</strong>" + "</p>"
+    );
     costOfLiving.attr("style", "background-color:white;");
 
     var costOfLivingDiv = $("<div>");
@@ -385,7 +389,15 @@ function goToNextPage(cityChosen) {
       "width:" + commuteScore * 10 + "%; background-color:red"
     );
 
+    var safety = $(
+      "<p>" + "<strong>" + response.categories[7].name + "</strong>" + "</p>"
+    );
+    safety.attr("style", "background-color:white;");
+    var safetyDiv = $("<div>");
+    safetyDiv.attr("class", "score-container");
+
     var safetyScoreDiv = $("<div>");
+    safetyScoreDiv.attr("class", "stats");
 
     var safetyScore = response.categories[7].score_out_of_10;
     safetyScore = Math.round(safetyScore);
@@ -413,7 +425,9 @@ function goToNextPage(cityChosen) {
       "width:" + healthcareScore * 10 + "%; background-color:red"
     );
 
-    var education = $("<p>" + "<strong>" + response.categories[9].name + "</strong>" + "</p>");
+    var education = $(
+      "<p>" + "<strong>" + response.categories[9].name + "</strong>" + "</p>"
+    );
     education.attr("style", "background-color:white;");
 
     var educationDiv = $("<div>");
@@ -466,7 +480,13 @@ function goToNextPage(cityChosen) {
       "width:" + outdoorsScore * 10 + "%; background-color:red"
     );
 
-    $("#city-qualities").append("The following quality of life data is aggragated by " + "<a href='https://developers.teleport.org/api/'>" + "Teleport" + "</a>" + ":");
+    $("#city-qualities").append(
+      "The following quality of life data is aggragated by " +
+        "<a href='https://developers.teleport.org/api/'>" +
+        "Teleport" +
+        "</a>" +
+        ":"
+    );
     $("#city-qualities").append("<hr>" + "</hr>");
 
     housingDiv.append(housing);
@@ -509,7 +529,7 @@ function goToNextPage(cityChosen) {
     startNewSearch.text("Start New Search");
     $("#nav-btn").append(startNewSearch);
 
-    $("#newSearch").click(function () {
+    $("#newSearch").click(function() {
       console.log("shouldnt be hereeeee 3");
       location.reload(true);
     });
