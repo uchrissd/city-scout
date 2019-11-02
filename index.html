@@ -65,55 +65,53 @@
     <div class="row">
       <div class="col s12">
         <div class="card center">
-          <div class="card-image" style="margin-left:23%">
-            <img src="./125729-fisheye_lens-3d-earth.jpg"
-              style="width:70%" />
-            <span class="card-title" style="font-size:25px;font-family:candara,arial,helvetica;font-weight:bold;">Greetings, Fellow Earthling!</span>
+          <div class="card-image" style="margin-left:29%">
+            <img src="./125729-fisheye_lens-3d-earth.jpg" style="width:60%;" />
+            <span class="card-title responsive" style="font-size:2vw;font-family:candara,arial,helvetica;font-weight:bold;background-color: rgba(0, 0, 255, 0.3);">
+              Greetings, Fellow Earthling!</span>
           </div>
           <div class="card-content">
-            <p>
+            <p style="font-size:18px;font-family:candara,arial,helvetica;">
               This is an app to assist travelers to get basic information on
               their chosen destination.
             </p>
           </div>
           <div class="card-action">
-            <a class="waves-effect waves-light btn-large start-btn" style="font-family:candara,arial,helvetica;">Get Started</a>
+            <a class="waves-effect waves-light btn-large start-btn"
+              style="font-family:candara,arial,helvetica;font-weight:bold;font-size:20px">Get Started</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-    <div id="dropdown-container" style="display:none">
-      <div class="row" id="instructions"></div>
-      <div class="row">
-        <div class="col s4 input-field dropdown" id="continent">
-          <button
-            class="btn btn-secondary dropdown-toggle"
-            type="button"
-            style="padding: 0 60px"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Continents
-          </button>
-        </div>
-        <div class="col s4 dropdown" id="country"></div>
-        <div class="col s4 dropdown" id="city"></div>
+  <div id="dropdown-container" style="display:none">
+    <div class="row" id="instructions">
+      <div class="col" id="continentText"></div>
+      <div class="col" id="countryText"></div>
+      <div class="col" id="cityText"></div>
+    </div>
+    <div class="row">
+      <div class="col s4 input-field dropdown" id="continent">
+        <button class="btn btn-secondary dropdown-toggle" type="button" style="padding: 0 60px" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Continents
+        </button>
       </div>
       <div class="col s4 dropdown" id="country"></div>
-      <div class="col s4" id="city"></div>
-      <div class="row">
-          <div class="col s12">
-            <button class="waves-effect waves-light btn-large red" type="submit" name="action"
-              style="display:float; float: left" id="clearBtn">
-              Clear History
-            </button>
-          </div>
-        </div>
+      <div class="col s4 dropdown" id="city"></div>
     </div>
+    <div class="col s4 dropdown" id="country"></div>
+    <div class="col s4" id="city"></div>
+    <div class="row">
+      <div class="col s12">
+        <button class="waves-effect waves-light btn-large red" type="submit" name="action"
+          style="display:float; float: left" id="clearBtn">
+          Clear History
+        </button>
+      </div>
+    </div>
+  </div>
   </div>
 
   <div id="cityinfo-container">
