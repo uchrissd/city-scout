@@ -25,7 +25,12 @@ function renderCurrencyExchange(currencyCode) {
 }
 
 function createElementsForCityPage(currency) {
-  var currencyEl = $("<p>" + "U.S. Dollar exhange rate: " + currency + "</p>");
+  var currencyEl = $(
+    "<p style='font-size:25px;font-family:candara,arial,helvetica;'>" +
+      "U.S. Dollar exchange rate: " +
+      currency +
+      "</p>"
+  );
   $("#currency-exchange").append(currencyEl);
 }
 
@@ -474,9 +479,8 @@ function goToNextPage(cityChosen) {
     $("#city-qualities").append(
       "The following quality of life data is aggragated by " +
         "<a href='https://developers.teleport.org/api/'>" +
-        "Teleport" +
-        "</a>" +
-        "™:"
+        "Teleport:" +
+        "</a>"
     );
     $("#city-qualities").append("<hr>" + "</hr>");
 
